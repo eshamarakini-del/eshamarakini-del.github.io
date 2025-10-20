@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capital Workspace - Your Personal Knowledge Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #fafafa;
+            --text-primary: #0a0a0a;
+            --text-secondary: #666666;
+            --border: #e8e8e8;
+            --accent: #0a0a0a;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.125rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.625rem 1.5rem;
+            border-radius: 6px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-secondary);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.85;
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 3rem 6rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.375rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 1.0625rem;
+        }
+
+        /* Features Section */
+        .features {
+            background: var(--bg-secondary);
+            padding: 6rem 3rem;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 4rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-card {
+            text-align: center;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 6rem 3rem;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 3rem 3rem 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.25rem 1.5rem;
+            }
+
+            .hero {
+                padding: 4rem 1.5rem 3rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.125rem;
+            }
+
+            .features {
+                padding: 4rem 1.5rem;
+            }
+
+            .features h2 {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cta {
+                padding: 4rem 1.5rem;
+            }
+
+            .cta h2 {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-large {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">Capital Workspace</div>
+            <div class="nav-buttons">
+                <a href="login.html" class="btn btn-secondary">Sign In</a>
+                <a href="login.html" class="btn btn-primary">Get Started</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Your Personal Knowledge Hub</h1>
+        <p>Organize your ideas, write blogs, save resources, and never forget important dates. All in one clean, simple workspace.</p>
+        <div class="hero-buttons">
+            <a href="login.html" class="btn btn-primary btn-large">Start Free</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="features-container">
+            <h2>Everything you need</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">01</div>
+                    <h3>Write & Publish</h3>
+                    <p>Create and organize your blog posts with a clean, distraction-free editor.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">02</div>
+                    <h3>Save Resources</h3>
+                    <p>Build your personal repository of links, documents, and notes that matter.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">03</div>
+                    <h3>Track Dates</h3>
+                    <p>Set reminders for important dates and deadlines so you never miss a thing.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">04</div>
+                    <h3>Secure & Private</h3>
+                    <p>Your data is encrypted and only accessible by you. We respect your privacy.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">05</div>
+                    <h3>Access Anywhere</h3>
+                    <p>Your workspace syncs across all devices. Work from anywhere, anytime.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">06</div>
+                    <h3>Team Ready</h3>
+                    <p>Share with teammates while keeping your personal data separate and secure.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>Ready to get organized?</h2>
+        <p>Join Capital Workspace today and take control of your knowledge.</p>
+        <a href="login.html" class="btn btn-primary btn-large">Get Started - It's Free</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Capital Workspace. Built with care.</p>
+    </footer>
+</body>
+</html>

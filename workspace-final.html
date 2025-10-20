@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capital Workspace</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #fafafa;
+            --text-primary: #0a0a0a;
+            --text-secondary: #666666;
+            --border: #e8e8e8;
+            --accent: #0a0a0a;
+            --hover: #f5f5f5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        header {
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.125rem;
+            font-weight: 500;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .user-info {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+        }
+
+        .logout-btn {
+            padding: 0.5rem 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: var(--hover);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 3rem 6rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tab {
+            padding: 0.75rem 0;
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            background: none;
+            border: none;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+            margin-right: 2rem;
+        }
+
+        .tab:hover {
+            color: var(--text-primary);
+        }
+
+        .tab.active {
+            color: var(--text-primary);
+            border-bottom-color: var(--accent);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .blog-editor {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .editor-header h2 {
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+
+        .save-btn {
+            padding: 0.5rem 1.25rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        .save-btn:hover {
+            opacity: 0.85;
+        }
+
+        .save-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        input[type="text"],
+        textarea,
+        input[type="date"] {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.9375rem;
+            font-family: inherit;
+            background: var(--bg-primary);
+            margin-bottom: 1rem;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus,
+        input[type="date"]:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        textarea {
+            min-height: 300px;
+            resize: vertical;
+        }
+
+        .blog-list,
+        .repo-list,
+        .reminder-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .blog-item,
+        .repo-item,
+        .reminder-item {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.2s;
+        }
+
+        .blog-item:hover,
+        .repo-item:hover {
+            border-color: var(--accent);
+        }
+
+        .blog-item-header,
+        .repo-item,
+        .reminder-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .blog-item h3,
+        .repo-item-content h3,
+        .reminder-item-content h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-item-date,
+        .reminder-item-date {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .blog-item-excerpt,
+        .repo-item-note {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+
+        .delete-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.875rem;
+            padding: 0.25rem 0.5rem;
+        }
+
+        .delete-btn:hover {
+            color: #dc2626;
+        }
+
+        .repo-item-link {
+            color: #0066cc;
+            font-size: 0.875rem;
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .repo-item-link:hover {
+            text-decoration: underline;
+        }
+
+        .repo-item-note {
+            margin-top: 0.5rem;
+        }
+
+        .reminder-item {
+            border-left: 3px solid var(--accent);
+        }
+
+        .reminder-item.urgent {
+            border-left-color: #dc2626;
+            background: #fef2f2;
+        }
+
+        .reminder-item.urgent .reminder-item-date {
+            color: #dc2626;
+            font-weight: 500;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .header-content,
+            .container {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+
+            .tab {
+                margin-right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">Capital Workspace</div>
+            <div class="header-right">
+                <div class="user-info" id="userEmail"></div>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="tabs">
+            <button class="tab active" data-tab="blog">Blog</button>
+            <button class="tab" data-tab="repository">Repository</button>
+            <button class="tab" data-tab="reminders">Reminders</button>
+        </div>
+
+        <div class="tab-content active" id="blog">
+            <div class="blog-editor">
+                <div class="editor-header">
+                    <h2>Write New Blog Post</h2>
+                    <button class="save-btn" onclick="saveBlog()">Save Post</button>
+                </div>
+                <input type="text" id="blogTitle" placeholder="Blog Title">
+                <textarea id="blogContent" placeholder="Write your blog post here..."></textarea>
+            </div>
+
+            <h3 style="margin-bottom: 1rem; font-weight: 500;">Your Blog Posts</h3>
+            <div class="loading" id="blogLoading">Loading...</div>
+            <div class="blog-list" id="blogList" style="display: none;"></div>
+        </div>
+
+        <div class="tab-content" id="repository">
+            <div class="blog-editor">
+                <div class="editor-header">
+                    <h2>Add to Repository</h2>
+                    <button class="save-btn" onclick="saveRepo()">Add Item</button>
+                </div>
+                <input type="text" id="repoTitle" placeholder="Title">
+                <input type="text" id="repoLink" placeholder="Link (optional)">
+                <textarea id="repoNote" placeholder="Notes..." style="min-height: 100px;"></textarea>
+            </div>
+
+            <h3 style="margin-bottom: 1rem; font-weight: 500;">Repository Items</h3>
+            <div class="loading" id="repoLoading">Loading...</div>
+            <div class="repo-list" id="repoList" style="display: none;"></div>
+        </div>
+
+        <div class="tab-content" id="reminders">
+            <div class="blog-editor">
+                <div class="editor-header">
+                    <h2>Add Reminder</h2>
+                    <button class="save-btn" onclick="saveReminder()">Add Reminder</button>
+                </div>
+                <input type="text" id="reminderTitle" placeholder="What do you need to remember?">
+                <input type="date" id="reminderDate">
+            </div>
+
+            <h3 style="margin-bottom: 1rem; font-weight: 500;">Upcoming Reminders</h3>
+            <div class="loading" id="reminderLoading">Loading...</div>
+            <div class="reminder-list" id="reminderList" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Initialize Supabase - using window.supabase from CDN
+        const SUPABASE_URL = 'https://qcyoukklhonwahklryyg.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFjeW91a2tsaG9ud2Foa2xyeXlnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA3Nzc3MjcsImV4cCI6MjA3NjM1MzcyN30.ra7TCZHZJgcfGcEaQxLRtod-szjfPsMsexXSv_DPZAM';
+        
+        const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // Check if user is logged in
+        const user = JSON.parse(localStorage.getItem('capitalWorkspaceUser') || '{}');
+        if (!user.email) {
+            window.location.href = 'login.html';
+        }
+        document.getElementById('userEmail').textContent = user.email;
+
+        // Tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                this.classList.add('active');
+                document.getElementById(this.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Logout
+        async function logout() {
+            await sb.auth.signOut();
+            localStorage.removeItem('capitalWorkspaceUser');
+            window.location.href = 'login.html';
+        }
+
+        // Blog functions
+        async function saveBlog() {
+            const title = document.getElementById('blogTitle').value;
+            const content = document.getElementById('blogContent').value;
+            
+            if (!title || !content) {
+                alert('Please fill in both title and content');
+                return;
+            }
+            
+            const { data, error } = await sb
+                .from('blogs')
+                .insert([{
+                    title: title,
+                    content: content,
+                    user_email: user.email
+                }]);
+            
+            if (error) {
+                alert('Error saving blog: ' + error.message);
+                return;
+            }
+            
+            document.getElementById('blogTitle').value = '';
+            document.getElementById('blogContent').value = '';
+            
+            loadBlogs();
+        }
+
+        async function loadBlogs() {
+            document.getElementById('blogLoading').style.display = 'block';
+            document.getElementById('blogList').style.display = 'none';
+            
+            const { data, error } = await sb
+                .from('blogs')
+                .select('*')
+                .eq('user_email', user.email)
+                .order('created_at', { ascending: false });
+            
+            document.getElementById('blogLoading').style.display = 'none';
+            document.getElementById('blogList').style.display = 'grid';
+            
+            if (error) {
+                alert('Error loading blogs: ' + error.message);
+                return;
+            }
+            
+            renderBlogs(data);
+        }
+
+        function renderBlogs(blogs) {
+            const blogList = document.getElementById('blogList');
+            
+            if (blogs.length === 0) {
+                blogList.innerHTML = '<div class="empty-state">No blog posts yet. Write your first one!</div>';
+                return;
+            }
+            
+            blogList.innerHTML = blogs.map(blog => `
+                <div class="blog-item">
+                    <div class="blog-item-header">
+                        <div>
+                            <h3>${blog.title}</h3>
+                            <div class="blog-item-date">${new Date(blog.created_at).toLocaleDateString()}</div>
+                        </div>
+                        <button class="delete-btn" onclick="deleteBlog(${blog.id})">Delete</button>
+                    </div>
+                    <div class="blog-item-excerpt">${blog.content.substring(0, 200)}${blog.content.length > 200 ? '...' : ''}</div>
+                </div>
+            `).join('');
+        }
+
+        async function deleteBlog(id) {
+            if (confirm('Delete this blog post?')) {
+                const { error } = await sb
+                    .from('blogs')
+                    .delete()
+                    .eq('id', id);
+                
+                if (error) {
+                    alert('Error deleting blog: ' + error.message);
+                    return;
+                }
+                
+                loadBlogs();
+            }
+        }
+
+        // Repository functions
+        async function saveRepo() {
+            const title = document.getElementById('repoTitle').value;
+            const link = document.getElementById('repoLink').value;
+            const note = document.getElementById('repoNote').value;
+            
+            if (!title) {
+                alert('Please enter a title');
+                return;
+            }
+            
+            const { data, error } = await sb
+                .from('repository')
+                .insert([{
+                    title: title,
+                    link: link,
+                    note: note,
+                    user_email: user.email
+                }]);
+            
+            if (error) {
+                alert('Error saving item: ' + error.message);
+                return;
+            }
+            
+            document.getElementById('repoTitle').value = '';
+            document.getElementById('repoLink').value = '';
+            document.getElementById('repoNote').value = '';
+            
+            loadRepos();
+        }
+
+        async function loadRepos() {
+            document.getElementById('repoLoading').style.display = 'block';
+            document.getElementById('repoList').style.display = 'none';
+            
+            const { data, error } = await sb
+                .from('repository')
+                .select('*')
+                .eq('user_email', user.email)
+                .order('created_at', { ascending: false });
+            
+            document.getElementById('repoLoading').style.display = 'none';
+            document.getElementById('repoList').style.display = 'grid';
+            
+            if (error) {
+                alert('Error loading repository: ' + error.message);
+                return;
+            }
+            
+            renderRepos(data);
+        }
+
+        function renderRepos(repos) {
+            const repoList = document.getElementById('repoList');
+            
+            if (repos.length === 0) {
+                repoList.innerHTML = '<div class="empty-state">No repository items yet. Add your first one!</div>';
+                return;
+            }
+            
+            repoList.innerHTML = repos.map(repo => `
+                <div class="repo-item">
+                    <div class="repo-item-content">
+                        <h3>${repo.title}</h3>
+                        ${repo.link ? `<a href="${repo.link}" class="repo-item-link" target="_blank">${repo.link}</a>` : ''}
+                        ${repo.note ? `<div class="repo-item-note">${repo.note}</div>` : ''}
+                    </div>
+                    <button class="delete-btn" onclick="deleteRepo(${repo.id})">Delete</button>
+                </div>
+            `).join('');
+        }
+
+        async function deleteRepo(id) {
+            if (confirm('Delete this item?')) {
+                const { error } = await sb
+                    .from('repository')
+                    .delete()
+                    .eq('id', id);
+                
+                if (error) {
+                    alert('Error deleting item: ' + error.message);
+                    return;
+                }
+                
+                loadRepos();
+            }
+        }
+
+        // Reminder functions
+        async function saveReminder() {
+            const title = document.getElementById('reminderTitle').value;
+            const date = document.getElementById('reminderDate').value;
+            
+            if (!title || !date) {
+                alert('Please fill in both title and date');
+                return;
+            }
+            
+            const { data, error } = await sb
+                .from('reminders')
+                .insert([{
+                    title: title,
+                    reminder_date: date,
+                    user_email: user.email
+                }]);
+            
+            if (error) {
+                alert('Error saving reminder: ' + error.message);
+                return;
+            }
+            
+            document.getElementById('reminderTitle').value = '';
+            document.getElementById('reminderDate').value = '';
+            
+            loadReminders();
+        }
+
+        async function loadReminders() {
+            document.getElementById('reminderLoading').style.display = 'block';
+            document.getElementById('reminderList').style.display = 'none';
+            
+            const { data, error } = await sb
+                .from('reminders')
+                .select('*')
+                .eq('user_email', user.email)
+                .order('reminder_date', { ascending: true });
+            
+            document.getElementById('reminderLoading').style.display = 'none';
+            document.getElementById('reminderList').style.display = 'grid';
+            
+            if (error) {
+                alert('Error loading reminders: ' + error.message);
+                return;
+            }
+            
+            renderReminders(data);
+        }
+
+        function renderReminders(reminders) {
+            const reminderList = document.getElementById('reminderList');
+            
+            if (reminders.length === 0) {
+                reminderList.innerHTML = '<div class="empty-state">No reminders yet. Add your first one!</div>';
+                return;
+            }
+            
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            reminderList.innerHTML = reminders.map(reminder => {
+                const reminderDate = new Date(reminder.reminder_date);
+                const daysUntil = Math.ceil((reminderDate - today) / (1000 * 60 * 60 * 24));
+                const isUrgent = daysUntil <= 7 && daysUntil >= 0;
+                
+                let dateText = reminderDate.toLocaleDateString();
+                if (daysUntil === 0) dateText = 'Today!';
+                else if (daysUntil === 1) dateText = 'Tomorrow';
+                else if (daysUntil > 0 && daysUntil <= 7) dateText = `In ${daysUntil} days`;
+                else if (daysUntil < 0) dateText = `${Math.abs(daysUntil)} days ago (overdue)`;
+                
+                return `
+                    <div class="reminder-item ${isUrgent || daysUntil < 0 ? 'urgent' : ''}">
+                        <div class="reminder-item-content">
+                            <h3>${reminder.title}</h3>
+                            <div class="reminder-item-date">${dateText} - ${reminderDate.toLocaleDateString()}</div>
+                        </div>
+                        <button class="delete-btn" onclick="deleteReminder(${reminder.id})">Delete</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        async function deleteReminder(id) {
+            if (confirm('Delete this reminder?')) {
+                const { error } = await sb
+                    .from('reminders')
+                    .delete()
+                    .eq('id', id);
+                
+                if (error) {
+                    alert('Error deleting reminder: ' + error.message);
+                    return;
+                }
+                
+                loadReminders();
+            }
+        }
+
+        // Load all data
+        loadBlogs();
+        loadRepos();
+        loadReminders();
+    </script>
+</body>
+</html>
