@@ -85,6 +85,27 @@
             padding: 3rem 3rem 6rem;
         }
 
+        /* Universal Search */
+        .universal-search {
+            margin-bottom: 2rem;
+        }
+
+        .universal-search input {
+            width: 100%;
+            max-width: 600px;
+            padding: 0.875rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.9375rem;
+            background: var(--bg-primary);
+            transition: border-color 0.2s;
+        }
+
+        .universal-search input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
         .tabs {
             display: flex;
             gap: 0.5rem;
@@ -315,6 +336,11 @@
     </header>
 
     <div class="container">
+        <!-- Universal Search -->
+        <div class="universal-search">
+            <input type="text" id="universalSearch" placeholder="Search blogs, repository, reminders...">
+        </div>
+
         <div class="tabs">
             <button class="tab active" data-tab="blog">Blog</button>
             <button class="tab" data-tab="repository">Repository</button>
@@ -427,7 +453,7 @@
             document.getElementById('blogTitle').value = '';
             document.getElementById('blogContent').value = '';
             
-            loadBlogs();
+            loadAndStoreBlogs();
         }
 
         async function loadBlogs() {
@@ -485,7 +511,7 @@
                     return;
                 }
                 
-                loadBlogs();
+                loadAndStoreBlogs();
             }
         }
 
@@ -518,7 +544,7 @@
             document.getElementById('repoLink').value = '';
             document.getElementById('repoNote').value = '';
             
-            loadRepos();
+            loadAndStoreRepos();
         }
 
         async function loadRepos() {
@@ -574,7 +600,7 @@
                     return;
                 }
                 
-                loadRepos();
+                loadAndStoreRepos();
             }
         }
 
@@ -604,7 +630,7 @@
             document.getElementById('reminderTitle').value = '';
             document.getElementById('reminderDate').value = '';
             
-            loadReminders();
+            loadAndStoreReminders();
         }
 
         async function loadReminders() {
@@ -674,14 +700,86 @@
                     return;
                 }
                 
-                loadReminders();
+                loadAndStoreReminders();
             }
         }
 
         // Load all data
-        loadBlogs();
-        loadRepos();
-        loadReminders();
+        loadAndStoreBlogs();
+        loadAndStoreRepos();
+        loadAndStoreReminders();
+
+        // Universal Search
+        let allBlogs = [];
+        let allRepos = [];
+        let allReminders = [];
+
+        // Store data when loaded
+        async function loadAndStoreBlogs() {
+            await loadAndStoreBlogs();
+            const { data } = await sb
+                .from('blogs')
+                .select('*')
+                .eq('user_email', user.email);
+            allBlogs = data || [];
+        }
+
+        async function loadAndStoreRepos() {
+            await loadAndStoreRepos();
+            const { data } = await sb
+                .from('repository')
+                .select('*')
+                .eq('user_email', user.email);
+            allRepos = data || [];
+        }
+
+        async function loadAndStoreReminders() {
+            await loadAndStoreReminders();
+            const { data } = await sb
+                .from('reminders')
+                .select('*')
+                .eq('user_email', user.email);
+            allReminders = data || [];
+        }
+
+        // Universal search handler
+        document.getElementById('universalSearch').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            if (searchTerm === '') {
+                // Show all content
+                renderBlogs(allBlogs);
+                renderRepos(allRepos);
+                renderReminders(allReminders);
+                return;
+            }
+
+            // Filter blogs
+            const filteredBlogs = allBlogs.filter(blog => 
+                blog.title.toLowerCase().includes(searchTerm) || 
+                blog.content.toLowerCase().includes(searchTerm)
+            );
+            renderBlogs(filteredBlogs);
+
+            // Filter repos
+            const filteredRepos = allRepos.filter(repo => 
+                repo.title.toLowerCase().includes(searchTerm) ||
+                (repo.note && repo.note.toLowerCase().includes(searchTerm)) ||
+                (repo.link && repo.link.toLowerCase().includes(searchTerm))
+            );
+            renderRepos(filteredRepos);
+
+            // Filter reminders
+            const filteredReminders = allReminders.filter(reminder => 
+                reminder.title.toLowerCase().includes(searchTerm)
+            );
+            renderReminders(filteredReminders);
+        });
+
+        // Update load functions to use the store versions
+        loadAndStoreBlogs();
+        loadAndStoreRepos();
+        loadAndStoreReminders();
     </script>
 </body>
 </html>
