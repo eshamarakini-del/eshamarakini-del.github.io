@@ -49,6 +49,16 @@
             margin-bottom: 3rem;
         }
 
+        .logo a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .logo a:hover {
+            opacity: 0.7;
+        }
+
         .login-card {
             background: var(--bg-primary);
             border: 1px solid var(--border);
@@ -190,7 +200,7 @@
 </head>
 <body>
     <div class="login-container">
-        <div class="logo">Capital Workspace</div>
+        <div class="logo"><a href="index.html">← Capital Workspace</a></div>
         
         <div class="login-card">
             <h1 id="formTitle">Welcome back</h1>
