@@ -335,13 +335,13 @@
 
     <div class="container">
         <div class="universal-search">
-            <input type="text" id="universalSearch" placeholder="Search blogs, repository, reminders..." oninput="handleSearch()">
+            <input type="text" id="universalSearch" placeholder="Search blogs, repository, loans..." oninput="handleSearch()">
         </div>
         
         <div class="tabs">
             <button class="tab active" data-tab="blog">Blog</button>
             <button class="tab" data-tab="repository">Repository</button>
-            <button class="tab" data-tab="reminders">Reminders</button>
+            <button class="tab" data-tab="loans">Loan Reminders</button>
         </div>
 
         <div class="tab-content active" id="blog">
@@ -375,19 +375,28 @@
             <div class="repo-list" id="repoList" style="display: none;"></div>
         </div>
 
-        <div class="tab-content" id="reminders">
-            <div class="blog-editor">
-                <div class="editor-header">
-                    <h2>Add Reminder</h2>
-                    <button class="save-btn" onclick="saveReminder()">Add Reminder</button>
-                </div>
-                <input type="text" id="reminderTitle" placeholder="What do you need to remember?">
-                <input type="date" id="reminderDate">
+        <div class="tab-content" id="loans">
+            <!-- Payment Date Banner -->
+            <div id="paymentBanner" style="display: none; background: #fef3c7; border: 1px solid #f59e0b; border-radius: 8px; padding: 1rem; margin-bottom: 2rem;">
+                <strong>⚠️ Loan Payment Due Today!</strong>
+                <div id="bannerDetails" style="margin-top: 0.5rem; font-size: 0.9375rem;"></div>
             </div>
 
-            <h3 style="margin-bottom: 1rem; font-weight: 500;">Upcoming Reminders</h3>
-            <div class="loading" id="reminderLoading">Loading...</div>
-            <div class="reminder-list" id="reminderList" style="display: none;"></div>
+            <div class="blog-editor">
+                <div class="editor-header">
+                    <h2>Add Loan</h2>
+                    <button class="save-btn" onclick="saveLoan()">Save Loan</button>
+                </div>
+                <input type="text" id="loanName" placeholder="Loan Name (e.g., Home Loan, Car Loan)">
+                <input type="number" id="loanAmount" placeholder="Principal Amount" step="1000">
+                <input type="number" id="loanRate" placeholder="Interest Rate (%)" step="0.1">
+                <input type="number" id="loanTenure" placeholder="Tenure (months)" step="1">
+                <input type="number" id="loanPaymentDate" placeholder="Payment Date (1-31)" min="1" max="31">
+            </div>
+
+            <h3 style="margin-bottom: 1rem; font-weight: 500;">Your Loans</h3>
+            <div class="loading" id="loanLoading">Loading...</div>
+            <div class="reminder-list" id="loanList" style="display: none;"></div>
         </div>
     </div>
 
@@ -601,91 +610,144 @@
             }
         }
 
-        // Reminder functions
-        async function saveReminder() {
-            const title = document.getElementById('reminderTitle').value;
-            const date = document.getElementById('reminderDate').value;
+        // Loan functions
+        function calculateEMI(principal, rate, tenure) {
+            const monthlyRate = rate / (12 * 100);
+            const emi = (principal * monthlyRate * Math.pow(1 + monthlyRate, tenure)) / 
+                        (Math.pow(1 + monthlyRate, tenure) - 1);
+            return Math.round(emi);
+        }
+
+        async function saveLoan() {
+            const name = document.getElementById('loanName').value;
+            const amount = document.getElementById('loanAmount').value;
+            const rate = document.getElementById('loanRate').value;
+            const tenure = document.getElementById('loanTenure').value;
+            const paymentDate = document.getElementById('loanPaymentDate').value;
             
-            if (!title || !date) {
-                alert('Please fill in both title and date');
+            if (!name || !amount || !rate || !tenure || !paymentDate) {
+                alert('Please fill in all fields');
                 return;
             }
             
+            if (paymentDate < 1 || paymentDate > 31) {
+                alert('Payment date must be between 1 and 31');
+                return;
+            }
+
+            const emi = calculateEMI(parseFloat(amount), parseFloat(rate), parseInt(tenure));
+            
             const { data, error } = await sb
-                .from('reminders')
+                .from('loans')
                 .insert([{
-                    title: title,
-                    reminder_date: date,
+                    loan_name: name,
+                    principal_amount: parseFloat(amount),
+                    interest_rate: parseFloat(rate),
+                    tenure_months: parseInt(tenure),
+                    payment_date: parseInt(paymentDate),
+                    monthly_emi: emi,
                     user_email: user.email
                 }]);
             
             if (error) {
-                alert('Error saving reminder: ' + error.message);
+                alert('Error saving loan: ' + error.message);
                 return;
             }
             
-            document.getElementById('reminderTitle').value = '';
-            document.getElementById('reminderDate').value = '';
+            document.getElementById('loanName').value = '';
+            document.getElementById('loanAmount').value = '';
+            document.getElementById('loanRate').value = '';
+            document.getElementById('loanTenure').value = '';
+            document.getElementById('loanPaymentDate').value = '';
             
-            loadReminders();
+            loadLoans();
         }
 
-        async function loadReminders() {
-            document.getElementById('reminderLoading').style.display = 'block';
-            document.getElementById('reminderList').style.display = 'none';
+        async function loadLoans() {
+            document.getElementById('loanLoading').style.display = 'block';
+            document.getElementById('loanList').style.display = 'none';
             
             const { data, error } = await sb
-                .from('reminders')
+                .from('loans')
                 .select('*')
                 .eq('user_email', user.email)
-                .order('reminder_date', { ascending: true });
+                .order('created_at', { ascending: false });
             
-            document.getElementById('reminderLoading').style.display = 'none';
-            document.getElementById('reminderList').style.display = 'grid';
+            document.getElementById('loanLoading').style.display = 'none';
+            document.getElementById('loanList').style.display = 'grid';
             
             if (error) {
                 alert('Error loading reminders: ' + error.message);
                 return;
             }
             
-            renderReminders(data);
+            renderLoans(data);
+            checkPaymentBanner(data);
         }
 
-        function renderReminders(reminders) {
-            const reminderList = document.getElementById('reminderList');
+        function checkPaymentBanner(loans) {
+            const today = new Date().getDate();
+            const banner = document.getElementById('paymentBanner');
+            const bannerDetails = document.getElementById('bannerDetails');
             
-            if (reminders.length === 0) {
-                reminderList.innerHTML = '<div class="empty-state">No reminders yet. Add your first one!</div>';
+            const dueToday = loans.filter(loan => loan.payment_date === today);
+            
+            if (dueToday.length > 0) {
+                banner.style.display = 'block';
+                bannerDetails.innerHTML = dueToday.map(loan => 
+                    `<div>${loan.loan_name}: ₹${loan.monthly_emi.toLocaleString()} due</div>`
+                ).join('');
+            } else {
+                banner.style.display = 'none';
+            }
+        }
+
+        function getDateSuffix(day) {
+            if (day >= 11 && day <= 13) return 'th';
+            switch (day % 10) {
+                case 1: return 'st';
+                case 2: return 'nd';
+                case 3: return 'rd';
+                default: return 'th';
+            }
+        }
+
+        function renderLoans(loans) {
+            const loanList = document.getElementById('loanList');
+            
+            if (loans.length === 0) {
+                loanList.innerHTML = '<div class="empty-state">No loans added yet. Add your first one!</div>';
                 return;
             }
             
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
+            const today = new Date().getDate();
             
-            reminderList.innerHTML = reminders.map(reminder => {
-                const reminderDate = new Date(reminder.reminder_date);
-                const daysUntil = Math.ceil((reminderDate - today) / (1000 * 60 * 60 * 24));
-                const isUrgent = daysUntil <= 7 && daysUntil >= 0;
-                
-                let dateText = reminderDate.toLocaleDateString();
-                if (daysUntil === 0) dateText = 'Today!';
-                else if (daysUntil === 1) dateText = 'Tomorrow';
-                else if (daysUntil > 0 && daysUntil <= 7) dateText = `In ${daysUntil} days`;
-                else if (daysUntil < 0) dateText = `${Math.abs(daysUntil)} days ago (overdue)`;
+            loanList.innerHTML = loans.map(loan => {
+                const isDueToday = loan.payment_date === today;
+                const totalInterest = (loan.monthly_emi * loan.tenure_months) - loan.principal_amount;
                 
                 return `
-                    <div class="reminder-item ${isUrgent || daysUntil < 0 ? 'urgent' : ''}">
-                        <div class="reminder-item-content">
-                            <h3>${reminder.title}</h3>
-                            <div class="reminder-item-date">${dateText} - ${reminderDate.toLocaleDateString()}</div>
+                    <div class="reminder-item ${isDueToday ? 'urgent' : ''}">
+                        <div class="reminder-item-content" style="width: 100%;">
+                            <h3>${loan.loan_name}</h3>
+                            <div style="margin-top: 0.75rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.9375rem;">
+                                <div><strong>Principal:</strong> ₹${loan.principal_amount.toLocaleString()}</div>
+                                <div><strong>Interest Rate:</strong> ${loan.interest_rate}%</div>
+                                <div><strong>Tenure:</strong> ${loan.tenure_months} months</div>
+                                <div><strong>Monthly EMI:</strong> ₹${loan.monthly_emi.toLocaleString()}</div>
+                                <div style="grid-column: 1 / -1;"><strong>Total Interest:</strong> ₹${Math.round(totalInterest).toLocaleString()}</div>
+                                <div style="grid-column: 1 / -1; margin-top: 0.25rem; ${isDueToday ? 'color: #dc2626; font-weight: 500;' : ''}">
+                                    ${isDueToday ? '⚠️ Payment due today!' : `Next payment: ${loan.payment_date}${getDateSuffix(loan.payment_date)} of the month`}
+                                </div>
+                            </div>
                         </div>
-                        <button class="delete-btn" onclick="deleteReminder(${reminder.id})">Delete</button>
+                        <button class="delete-btn" onclick="deleteLoan(${loan.id})">Delete</button>
                     </div>
                 `;
             }).join('');
         }
 
-        async function deleteReminder(id) {
+        async function deleteLoan(id) {
             if (confirm('Delete this reminder?')) {
                 const { error } = await sb
                     .from('reminders')
@@ -697,24 +759,24 @@
                     return;
                 }
                 
-                loadReminders();
+                loadLoans();
             }
         }
 
         // Load all data
         loadBlogs();
         loadRepos();
-        loadReminders();
+        loadLoans();
 
         // Universal search - store data globally
         let allBlogs = [];
         let allRepos = [];
-        let allReminders = [];
+        let allLoans = [];
 
         // Override render functions to store data
         const originalRenderBlogs = renderBlogs;
         const originalRenderRepos = renderRepos;
-        const originalRenderReminders = renderReminders;
+        const originalRenderReminders = renderLoans;
 
         renderBlogs = function(blogs) {
             allBlogs = blogs;
@@ -726,8 +788,8 @@
             originalRenderRepos(repos);
         };
 
-        renderReminders = function(reminders) {
-            allReminders = reminders;
+        renderLoans = function(reminders) {
+            allLoans = reminders;
             originalRenderReminders(reminders);
         };
 
@@ -738,7 +800,7 @@
             if (searchTerm === '') {
                 originalRenderBlogs(allBlogs);
                 originalRenderRepos(allRepos);
-                originalRenderReminders(allReminders);
+                originalRenderReminders(allLoans);
                 return;
             }
 
@@ -758,7 +820,7 @@
             originalRenderRepos(filteredRepos);
 
             // Filter and render reminders
-            const filteredReminders = allReminders.filter(reminder => 
+            const filteredReminders = allLoans.filter(reminder => 
                 reminder.title.toLowerCase().includes(searchTerm)
             );
             originalRenderReminders(filteredReminders);
