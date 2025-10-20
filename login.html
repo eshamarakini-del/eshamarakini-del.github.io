@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Capital Workspace - Your Personal Knowledge Hub</title>
+    <title>Login - Capital Workspace</title>
     <style>
         * {
             margin: 0;
@@ -18,272 +18,339 @@
             --text-secondary: #666666;
             --border: #e8e8e8;
             --accent: #0a0a0a;
+            --hover: #f5f5f5;
+            --error: #dc2626;
+            --success: #16a34a;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
-            background: var(--bg-primary);
+            background: var(--bg-secondary);
             color: var(--text-primary);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-        }
-
-        /* Header */
-        header {
-            background: var(--bg-primary);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1.5rem 3rem;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 2rem;
         }
 
         .logo {
-            font-size: 1.125rem;
+            font-size: 1.25rem;
             font-weight: 500;
             letter-spacing: -0.02em;
+            text-align: center;
+            margin-bottom: 3rem;
         }
 
-        .nav-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn {
-            padding: 0.625rem 1.5rem;
-            border-radius: 6px;
-            font-size: 0.9375rem;
-            font-weight: 500;
-            text-decoration: none;
-            transition: all 0.2s;
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-secondary {
-            background: transparent;
+        .logo a {
             color: var(--text-primary);
-            border: 1px solid var(--border);
+            text-decoration: none;
+            transition: opacity 0.2s;
         }
 
-        .btn-secondary:hover {
-            background: var(--bg-secondary);
+        .logo a:hover {
+            opacity: 0.7;
         }
 
-        .btn-primary {
-            background: var(--accent);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            opacity: 0.85;
-        }
-
-        /* Hero Section */
-        .hero {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 8rem 3rem 6rem;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 600;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero p {
-            font-size: 1.375rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 3rem;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn-large {
-            padding: 1rem 2rem;
-            font-size: 1.0625rem;
-        }
-
-        /* Features Section */
-        .features {
-            background: var(--bg-secondary);
-            padding: 6rem 3rem;
-        }
-
-        .features-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .features h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            margin-bottom: 4rem;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-        }
-
-        .feature-card {
-            text-align: center;
-        }
-
-        .feature-icon {
-            width: 48px;
-            height: 48px;
+        .login-card {
             background: var(--bg-primary);
             border: 1px solid var(--border);
             border-radius: 8px;
-            margin: 0 auto 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
+            padding: 2.5rem;
+        }
+
+        h1 {
+            font-size: 1.5rem;
             font-weight: 500;
-        }
-
-        .feature-card h3 {
-            font-size: 1.25rem;
-            font-weight: 500;
-            margin-bottom: 0.75rem;
-        }
-
-        .feature-card p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        /* CTA Section */
-        .cta {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 6rem 3rem;
-            text-align: center;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            font-weight: 600;
+            margin-bottom: 0.5rem;
             letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
             margin-bottom: 1.5rem;
         }
 
-        .cta p {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            margin-bottom: 2.5rem;
+        label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
         }
 
-        /* Footer */
-        footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border);
-            padding: 3rem 3rem 2rem;
-            text-align: center;
-        }
-
-        footer p {
-            color: var(--text-secondary);
+        input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
             font-size: 0.9375rem;
+            background: var(--bg-primary);
+            transition: border-color 0.2s;
         }
 
-        /* Responsive */
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 0.875rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .login-btn:hover {
+            opacity: 0.85;
+        }
+
+        .login-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .signup-link {
+            text-align: center;
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            margin-top: 1.5rem;
+        }
+
+        .signup-link a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .message {
+            padding: 0.75rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .message.error {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: var(--error);
+        }
+
+        .message.success {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: var(--success);
+        }
+
         @media (max-width: 768px) {
-            nav {
-                padding: 1.25rem 1.5rem;
+            .login-container {
+                padding: 1.5rem;
             }
 
-            .hero {
-                padding: 4rem 1.5rem 3rem;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.125rem;
-            }
-
-            .features {
-                padding: 4rem 1.5rem;
-            }
-
-            .features h2 {
-                font-size: 2rem;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .cta {
-                padding: 4rem 1.5rem;
-            }
-
-            .cta h2 {
-                font-size: 2rem;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn-large {
-                width: 100%;
-                max-width: 300px;
+            .login-card {
+                padding: 2rem 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav>
-            <div class="logo">Capital Workspace</div>
-            <div class="nav-buttons">
-                <a href="login.html" class="btn btn-primary">Sign In</a>
+    <div class="login-container">
+        <div class="logo"><a href="index.html">← Capital Workspace</a></div>
+        
+        <div class="login-card">
+            <h1 id="formTitle">Welcome back</h1>
+            <p class="subtitle" id="formSubtitle">Sign in to your workspace</p>
+
+            <div class="message" id="message"></div>
+
+            <form id="authForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="you@example.com"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="Enter your password"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="login-btn" id="submitBtn">
+                    Sign In
+                </button>
+            </form>
+
+            <div class="divider">or</div>
+
+            <div class="signup-link">
+                <span id="switchText">Don't have an account?</span> 
+                <a id="switchLink">Sign up</a>
             </div>
-        </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1>Capital Workspace</h1>
-        <div class="hero-buttons">
-            <a href="login.html" class="btn btn-primary btn-large">Sign In</a>
         </div>
-    </section>
+    </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Capital Workspace</p>
-    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Initialize Supabase - using window.supabase from CDN
+        const SUPABASE_URL = 'https://qcyoukklhonwahklryyg.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFjeW91a2tsaG9ud2Foa2xyeXlnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA3Nzc3MjcsImV4cCI6MjA3NjM1MzcyN30.ra7TCZHZJgcfGcEaQxLRtod-szjfPsMsexXSv_DPZAM';
+        
+        const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        let isSignUp = false;
+
+        const authForm = document.getElementById('authForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const message = document.getElementById('message');
+        const formTitle = document.getElementById('formTitle');
+        const formSubtitle = document.getElementById('formSubtitle');
+        const switchText = document.getElementById('switchText');
+        const switchLink = document.getElementById('switchLink');
+
+        // Switch between sign in and sign up
+        switchLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            isSignUp = !isSignUp;
+            
+            if (isSignUp) {
+                formTitle.textContent = 'Create account';
+                formSubtitle.textContent = 'Sign up for Capital Workspace';
+                submitBtn.textContent = 'Sign Up';
+                switchText.textContent = 'Already have an account?';
+                switchLink.textContent = 'Sign in';
+            } else {
+                formTitle.textContent = 'Welcome back';
+                formSubtitle.textContent = 'Sign in to your workspace';
+                submitBtn.textContent = 'Sign In';
+                switchText.textContent = "Don't have an account?";
+                switchLink.textContent = 'Sign up';
+            }
+            
+            message.classList.remove('show');
+        });
+
+        // Handle form submission
+        authForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = isSignUp ? 'Creating account...' : 'Signing in...';
+            message.classList.remove('show');
+            
+            try {
+                let result;
+                
+                if (isSignUp) {
+                    result = await sb.auth.signUp({
+                        email: email,
+                        password: password
+                    });
+                    
+                    if (result.error) throw result.error;
+                    
+                    showMessage('Account created! You can now sign in.', 'success');
+                    
+                    setTimeout(() => {
+                        switchLink.click();
+                    }, 1500);
+                    
+                } else {
+                    result = await sb.auth.signInWithPassword({
+                        email: email,
+                        password: password
+                    });
+                    
+                    if (result.error) throw result.error;
+                    
+                    localStorage.setItem('capitalWorkspaceUser', JSON.stringify({ 
+                        email: email,
+                        userId: result.data.user.id 
+                    }));
+                    window.location.href = 'capital-workspace.html';
+                }
+                
+            } catch (error) {
+                showMessage(error.message, 'error');
+                submitBtn.disabled = false;
+                submitBtn.textContent = isSignUp ? 'Sign Up' : 'Sign In';
+            }
+        });
+
+        function showMessage(text, type) {
+            message.textContent = text;
+            message.className = 'message show ' + type;
+        }
+
+        // Check if already logged in
+        window.addEventListener('load', async function() {
+            const { data: { user } } = await sb.auth.getUser();
+            if (user) {
+                localStorage.setItem('capitalWorkspaceUser', JSON.stringify({ 
+                    email: user.email,
+                    userId: user.id 
+                }));
+                window.location.href = 'capital-workspace.html';
+            }
+        });
+    </script>
 </body>
 </html>
