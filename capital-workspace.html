@@ -388,10 +388,10 @@
                     <button class="save-btn" onclick="saveLoan()">Save Loan</button>
                 </div>
                 <input type="text" id="loanName" placeholder="Loan Name (e.g., Home Loan, Car Loan)">
-                <input type="number" id="loanAmount" placeholder="Principal Amount" step="1000">
-                <input type="number" id="loanRate" placeholder="Interest Rate (%)" step="0.1">
-                <input type="number" id="loanTenure" placeholder="Tenure (months)" step="1">
-                <input type="number" id="loanPaymentDate" placeholder="Payment Date (1-31)" min="1" max="31">
+                <input type="number" id="loanAmount" placeholder="Principal Amount (₹)">
+                <input type="number" id="loanRate" placeholder="Interest Rate (% per annum)">
+                <input type="number" id="loanTenure" placeholder="Tenure in Months">
+                <input type="number" id="loanPaymentDate" placeholder="Payment Date Each Month (e.g., 5 for 5th)" min="1" max="31">
             </div>
 
             <h3 style="margin-bottom: 1rem; font-weight: 500;">Your Loans</h3>
@@ -434,6 +434,8 @@
         }
 
         // Blog functions
+        let editingBlogId = null;
+
         async function saveBlog() {
             const title = document.getElementById('blogTitle').value;
             const content = document.getElementById('blogContent').value;
@@ -443,13 +445,31 @@
                 return;
             }
             
-            const { data, error } = await sb
-                .from('blogs')
-                .insert([{
-                    title: title,
-                    content: content,
-                    user_email: user.email
-                }]);
+            let error;
+            
+            if (editingBlogId) {
+                // Update existing blog
+                const result = await sb
+                    .from('blogs')
+                    .update({
+                        title: title,
+                        content: content
+                    })
+                    .eq('id', editingBlogId);
+                error = result.error;
+                editingBlogId = null;
+                document.querySelector('#blog .save-btn').textContent = 'Save Post';
+            } else {
+                // Insert new blog
+                const result = await sb
+                    .from('blogs')
+                    .insert([{
+                        title: title,
+                        content: content,
+                        user_email: user.email
+                    }]);
+                error = result.error;
+            }
             
             if (error) {
                 alert('Error saving blog: ' + error.message);
@@ -460,6 +480,14 @@
             document.getElementById('blogContent').value = '';
             
             loadBlogs();
+        }
+
+        function editBlog(id, title, content) {
+            editingBlogId = id;
+            document.getElementById('blogTitle').value = title;
+            document.getElementById('blogContent').value = content;
+            document.querySelector('#blog .save-btn').textContent = 'Update Post';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         async function loadBlogs() {
@@ -498,7 +526,10 @@
                             <h3>${blog.title}</h3>
                             <div class="blog-item-date">${new Date(blog.created_at).toLocaleDateString()}</div>
                         </div>
-                        <button class="delete-btn" onclick="deleteBlog(${blog.id})">Delete</button>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="delete-btn" onclick="editBlog(${blog.id}, '${blog.title.replace(/'/g, "\\'")}', \`${blog.content.replace(/`/g, '\\`')}\`)">Edit</button>
+                            <button class="delete-btn" onclick="deleteBlog(${blog.id})">Delete</button>
+                        </div>
                     </div>
                     <div class="blog-item-excerpt">${blog.content.substring(0, 200)}${blog.content.length > 200 ? '...' : ''}</div>
                 </div>
@@ -522,6 +553,8 @@
         }
 
         // Repository functions
+        let editingRepoId = null;
+
         async function saveRepo() {
             const title = document.getElementById('repoTitle').value;
             const link = document.getElementById('repoLink').value;
@@ -532,14 +565,33 @@
                 return;
             }
             
-            const { data, error } = await sb
-                .from('repository')
-                .insert([{
-                    title: title,
-                    link: link,
-                    note: note,
-                    user_email: user.email
-                }]);
+            let error;
+            
+            if (editingRepoId) {
+                // Update existing item
+                const result = await sb
+                    .from('repository')
+                    .update({
+                        title: title,
+                        link: link,
+                        note: note
+                    })
+                    .eq('id', editingRepoId);
+                error = result.error;
+                editingRepoId = null;
+                document.querySelector('#repository .save-btn').textContent = 'Add Item';
+            } else {
+                // Insert new item
+                const result = await sb
+                    .from('repository')
+                    .insert([{
+                        title: title,
+                        link: link,
+                        note: note,
+                        user_email: user.email
+                    }]);
+                error = result.error;
+            }
             
             if (error) {
                 alert('Error saving item: ' + error.message);
@@ -551,6 +603,21 @@
             document.getElementById('repoNote').value = '';
             
             loadRepos();
+        }
+
+        function editRepo(id, title, link, note) {
+            editingRepoId = id;
+            document.getElementById('repoTitle').value = title;
+            document.getElementById('repoLink').value = link;
+            document.getElementById('repoNote').value = note;
+            document.querySelector('#repository .save-btn').textContent = 'Update Item';
+            
+            // Switch to repository tab and scroll to top
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelector('[data-tab="repository"]').classList.add('active');
+            document.getElementById('repository').classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         async function loadRepos() {
@@ -589,7 +656,10 @@
                         ${repo.link ? `<a href="${repo.link}" class="repo-item-link" target="_blank">${repo.link}</a>` : ''}
                         ${repo.note ? `<div class="repo-item-note">${repo.note}</div>` : ''}
                     </div>
-                    <button class="delete-btn" onclick="deleteRepo(${repo.id})">Delete</button>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="delete-btn" onclick='editRepo(${repo.id}, \`${(repo.title || '').replace(/`/g, '\\`')}\`, \`${(repo.link || '').replace(/`/g, '\\`')}\`, \`${(repo.note || '').replace(/`/g, '\\`')}\`)'>Edit</button>
+                        <button class="delete-btn" onclick="deleteRepo(${repo.id})">Delete</button>
+                    </div>
                 </div>
             `).join('');
         }
@@ -611,6 +681,8 @@
         }
 
         // Loan functions
+        let editingLoanId = null;
+
         function calculateEMI(principal, rate, tenure) {
             const monthlyRate = rate / (12 * 100);
             const emi = (principal * monthlyRate * Math.pow(1 + monthlyRate, tenure)) / 
@@ -637,17 +709,39 @@
 
             const emi = calculateEMI(parseFloat(amount), parseFloat(rate), parseInt(tenure));
             
-            const { data, error } = await sb
-                .from('loans')
-                .insert([{
-                    loan_name: name,
-                    principal_amount: parseFloat(amount),
-                    interest_rate: parseFloat(rate),
-                    tenure_months: parseInt(tenure),
-                    payment_date: parseInt(paymentDate),
-                    monthly_emi: emi,
-                    user_email: user.email
-                }]);
+            let error;
+            
+            if (editingLoanId) {
+                // Update existing loan
+                const result = await sb
+                    .from('loans')
+                    .update({
+                        loan_name: name,
+                        principal_amount: parseFloat(amount),
+                        interest_rate: parseFloat(rate),
+                        tenure_months: parseInt(tenure),
+                        payment_date: parseInt(paymentDate),
+                        monthly_emi: emi
+                    })
+                    .eq('id', editingLoanId);
+                error = result.error;
+                editingLoanId = null;
+                document.querySelector('#loans .save-btn').textContent = 'Save Loan';
+            } else {
+                // Insert new loan
+                const result = await sb
+                    .from('loans')
+                    .insert([{
+                        loan_name: name,
+                        principal_amount: parseFloat(amount),
+                        interest_rate: parseFloat(rate),
+                        tenure_months: parseInt(tenure),
+                        payment_date: parseInt(paymentDate),
+                        monthly_emi: emi,
+                        user_email: user.email
+                    }]);
+                error = result.error;
+            }
             
             if (error) {
                 alert('Error saving loan: ' + error.message);
@@ -661,6 +755,17 @@
             document.getElementById('loanPaymentDate').value = '';
             
             loadLoans();
+        }
+
+        function editLoan(id, name, amount, rate, tenure, paymentDate) {
+            editingLoanId = id;
+            document.getElementById('loanName').value = name;
+            document.getElementById('loanAmount').value = amount;
+            document.getElementById('loanRate').value = rate;
+            document.getElementById('loanTenure').value = tenure;
+            document.getElementById('loanPaymentDate').value = paymentDate;
+            document.querySelector('#loans .save-btn').textContent = 'Update Loan';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         async function loadLoans() {
@@ -741,7 +846,10 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="delete-btn" onclick="deleteLoan(${loan.id})">Delete</button>
+                        <div style="display: flex; gap: 0.5rem; flex-direction: column;">
+                            <button class="delete-btn" onclick='editLoan(${loan.id}, \`${loan.loan_name.replace(/`/g, '\\`')}\`, ${loan.principal_amount}, ${loan.interest_rate}, ${loan.tenure_months}, ${loan.payment_date})'>Edit</button>
+                            <button class="delete-btn" onclick="deleteLoan(${loan.id})">Delete</button>
+                        </div>
                     </div>
                 `;
             }).join('');
