@@ -66,9 +66,10 @@
             font-size: 0.9375rem;
             font-weight: 500;
             text-decoration: none;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             cursor: pointer;
             border: none;
+            display: inline-block;
         }
 
         .btn-secondary {
@@ -79,6 +80,7 @@
 
         .btn-secondary:hover {
             background: var(--bg-secondary);
+            transform: translateY(-1px);
         }
 
         .btn-primary {
@@ -87,7 +89,8 @@
         }
 
         .btn-primary:hover {
-            opacity: 0.85;
+            opacity: 0.9;
+            transform: translateY(-1px);
         }
 
         /* Hero Section */
@@ -152,6 +155,14 @@
 
         .feature-card {
             text-align: center;
+            padding: 2rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            background: var(--bg-primary);
+            transform: translateY(-2px);
         }
 
         .feature-icon {
@@ -166,6 +177,11 @@
             justify-content: center;
             font-size: 1.25rem;
             font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            border-color: var(--accent);
         }
 
         .feature-card h3 {
@@ -279,9 +295,41 @@
     <!-- Hero Section -->
     <section class="hero">
         <h1>Capital Workspace</h1>
+        <p>Your personal knowledge hub for organizing ideas, projects, and resources in one simple place.</p>
         <div class="hero-buttons">
             <a href="login.html" class="btn btn-primary btn-large">Sign In</a>
         </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="features-container">
+            <h2>Simple & Focused</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>Organize Your Thoughts</h3>
+                    <p>Keep your notes, ideas, and projects structured in an easy-to-navigate workspace.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Stay Focused</h3>
+                    <p>A clean, distraction-free interface that helps you concentrate on what matters.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Quick Access</h3>
+                    <p>Find and access your important information instantly whenever you need it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>Ready to get started?</h2>
+        <p>Create your personal knowledge workspace today.</p>
+        <a href="login.html" class="btn btn-primary btn-large">Sign In Now</a>
     </section>
 
     <!-- Footer -->
