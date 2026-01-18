@@ -244,6 +244,11 @@
             align-items: center;
             justify-content: center;
             font-size: 1.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.15) translateY(-2px);
         }
 
         .feature-card:nth-child(2) .feature-icon {
@@ -283,6 +288,13 @@
 
         .stat-item {
             padding: 1.5rem;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+        }
+
+        .stat-item:hover {
+            background: var(--bg-secondary);
+            transform: translateY(-4px);
         }
 
         .stat-number {
@@ -291,6 +303,11 @@
             color: var(--accent);
             letter-spacing: -0.02em;
             margin-bottom: 0.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover .stat-number {
+            transform: scale(1.1);
         }
 
         .stat-label {
