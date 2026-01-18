@@ -452,7 +452,7 @@
         <!-- Start Screen -->
         <div id="startScreen" class="start-screen">
             <h1>NBFC Knowledge Assessment</h1>
-            <p>Test your knowledge with this comprehensive 50-question assessment covering Non-Banking Financial Companies (NBFCs) - regulations, types, compliance, and governance.</p>
+            <p>Test your knowledge with this comprehensive 50-question assessment covering Non-Banking Financial Companies (NBFCs) - regulations, types, compliance, and governance. Questions are randomly selected from a bank of 100+ questions, so each test is different!</p>
             <div class="test-info">
                 <div class="info-item">
                     <div class="value">50</div>
@@ -541,7 +541,9 @@
     </div>
 
     <script>
-        const questions = [
+        // Complete Question Bank - 100+ questions covering all NBFC topics
+        const questionBank = [
+            // NBFC Basics and Registration
             {
                 question: "What does NBFC stand for?",
                 options: ["Non-Banking Financial Company", "National Banking Finance Corporation", "Non-Business Financial Corporation", "National Business Finance Company"],
@@ -592,6 +594,7 @@
                 options: ["Micro Finance Institution", "Major Finance Institution", "Medium Finance Institution", "Mutual Fund Institution"],
                 correct: 0
             },
+            // NBFC-MFI Specifics
             {
                 question: "What percentage of the total assets of NBFC-MFI should be in the nature of qualifying assets?",
                 options: ["50%", "65%", "75%", "85%"],
@@ -607,6 +610,7 @@
                 options: ["NBFC with asset size of Rs. 100 crore and above", "NBFC with asset size of Rs. 500 crore and above", "NBFC with asset size of Rs. 1000 crore and above", "Any NBFC accepting public deposits"],
                 correct: 1
             },
+            // Capital Requirements
             {
                 question: "What is the minimum CRAR (Capital to Risk Weighted Assets Ratio) for NBFCs?",
                 options: ["9%", "12%", "15%", "18%"],
@@ -617,6 +621,12 @@
                 options: ["Subordinated debt only", "Paid-up equity capital, free reserves, and certain other components minus intangible assets", "Only retained earnings", "Deposits from public"],
                 correct: 1
             },
+            {
+                question: "What is Tier II capital for an NBFC?",
+                options: ["Paid-up equity capital", "Preference shares, subordinated debt, and general provisions", "Only retained earnings", "Customer deposits"],
+                correct: 1
+            },
+            // Asset Classification
             {
                 question: "What is the asset classification norm for Standard Assets in NBFCs?",
                 options: ["No overdue payments", "Overdue for less than 90 days", "Overdue for less than 180 days", "Overdue for less than 30 days"],
@@ -638,6 +648,12 @@
                 correct: 0
             },
             {
+                question: "What is a Loss Asset?",
+                options: ["Any NPA", "Asset where loss has been identified but not fully written off", "Asset overdue for 90 days", "Restructured asset"],
+                correct: 1
+            },
+            // Provisioning Requirements
+            {
                 question: "What is the provisioning requirement for Standard Assets for NBFC-ICC?",
                 options: ["0.25%", "0.40%", "0.50%", "1.00%"],
                 correct: 1
@@ -647,6 +663,17 @@
                 options: ["5%", "10%", "15%", "20%"],
                 correct: 1
             },
+            {
+                question: "What is the provisioning requirement for Doubtful Assets up to 1 year?",
+                options: ["10%", "20%", "30%", "50%"],
+                correct: 1
+            },
+            {
+                question: "What is the provisioning requirement for Loss Assets?",
+                options: ["50%", "75%", "90%", "100%"],
+                correct: 3
+            },
+            // KYC/AML
             {
                 question: "Which regulatory framework covers KYC norms for NBFCs?",
                 options: ["Master Direction on KYC", "PMLA, 2002", "Both A and B", "Companies Act, 2013"],
@@ -673,6 +700,17 @@
                 correct: 1
             },
             {
+                question: "What does PEP stand for in KYC context?",
+                options: ["Personal Exemption Policy", "Politically Exposed Person", "Private Equity Partner", "Public Enterprise Policy"],
+                correct: 1
+            },
+            {
+                question: "What is the time limit for filing STR with FIU-IND?",
+                options: ["Immediately", "Within 7 days of suspicion", "Within 15 days", "Within 30 days"],
+                correct: 1
+            },
+            // Fair Practices and Governance
+            {
                 question: "What is the Fair Practices Code (FPC)?",
                 options: ["Code for employee conduct", "Code for fair and transparent dealing with customers", "Code for regulatory compliance", "Code for internal audit"],
                 correct: 1
@@ -682,6 +720,12 @@
                 options: ["Registration of NBFCs", "Recovery of dues without court intervention", "Accepting public deposits", "Granting loans to priority sector"],
                 correct: 1
             },
+            {
+                question: "What is the minimum number of independent directors required on the board of NBFC-UL?",
+                options: ["One-third", "Half", "Two-thirds", "All directors"],
+                correct: 1
+            },
+            // Types of NBFCs
             {
                 question: "What is an NBFC-Factor?",
                 options: ["An NBFC whose principal business is factoring", "An NBFC dealing in insurance", "An NBFC providing housing finance", "An NBFC dealing in securities"],
@@ -707,6 +751,7 @@
                 options: ["Company that consolidates financial accounts", "Non-deposit taking NBFC engaged in consent-based data sharing", "Company that aggregates insurance policies", "Company that provides credit scores"],
                 correct: 1
             },
+            // Scale Based Regulation
             {
                 question: "What is Scale Based Regulation (SBR) framework for NBFCs?",
                 options: ["Regulation based on geographical location", "Regulation based on type of customers", "Regulation based on size, activity, and perceived riskiness", "Regulation based on ownership pattern"],
@@ -733,25 +778,64 @@
                 correct: 0
             },
             {
+                question: "What is the Top Layer in Scale Based Regulation?",
+                options: ["NBFCs with assets above Rs. 50,000 crore", "NBFCs perceived to pose extreme systemic risk", "All government NBFCs", "NBFCs with foreign ownership"],
+                correct: 1
+            },
+            {
                 question: "What is the minimum Tier 1 capital requirement for NBFC-UL?",
                 options: ["8%", "9%", "10%", "12%"],
                 correct: 2
             },
+            // Liquidity Requirements
             {
                 question: "What is the Liquidity Coverage Ratio (LCR) requirement for non-deposit taking NBFCs with asset size Rs. 10,000 crore and above?",
                 options: ["50%", "60%", "85%", "100%"],
                 correct: 2
             },
             {
+                question: "What is LCR?",
+                options: ["Loan to Cost Ratio", "Liquidity Coverage Ratio", "Lending Capacity Ratio", "Liability Coverage Ratio"],
+                correct: 1
+            },
+            {
+                question: "What are High Quality Liquid Assets (HQLA)?",
+                options: ["Real estate", "Cash and government securities that can be easily converted to cash", "Gold reserves", "Fixed deposits"],
+                correct: 1
+            },
+            // AML/CFT
+            {
                 question: "What is the concept of Principal Officer in context of AML/CFT?",
                 options: ["CEO of the company", "Designated officer responsible for AML compliance", "External auditor", "Board chairman"],
                 correct: 1
             },
             {
+                question: "What does CFT stand for?",
+                options: ["Central Finance Tribunal", "Combating the Financing of Terrorism", "Corporate Financial Trading", "Customer Financial Transaction"],
+                correct: 1
+            },
+            {
+                question: "What is FIU-IND?",
+                options: ["Financial Investigation Unit of India", "Financial Intelligence Unit - India", "Federal Investigation Unit - India", "Finance Integration Unit - India"],
+                correct: 1
+            },
+            // Corporate Governance
+            {
                 question: "What is the Corporate Governance requirement for NBFCs in Upper Layer?",
                 options: ["No specific requirement", "Same as Middle Layer", "Governance standards comparable to banks", "Self-regulation"],
                 correct: 2
             },
+            {
+                question: "What is the role of Audit Committee in NBFCs?",
+                options: ["Only statutory audit", "Overseeing internal controls, financial reporting, and compliance", "Marketing activities", "Loan sanctioning"],
+                correct: 1
+            },
+            {
+                question: "What is the role of Risk Management Committee?",
+                options: ["Marketing risk assessment", "Identifying, measuring, and mitigating various risks", "Human resource management", "Customer complaints"],
+                correct: 1
+            },
+            // General Terms
             {
                 question: "What is NPA in the context of NBFCs?",
                 options: ["Net Profit After tax", "Non-Performing Asset", "New Payment Architecture", "National Payment Authorization"],
@@ -767,6 +851,7 @@
                 options: ["Any NBFC lending to infrastructure", "NBFC with minimum 75% of assets in infrastructure loans with minimum NOF of Rs. 300 crore", "Government company for infrastructure development", "NBFC registered under Companies Act only"],
                 correct: 1
             },
+            // Concentration Norms
             {
                 question: "What is concentration norm?",
                 options: ["Minimum lending to priority sector", "Limits on exposure to single borrower or group of borrowers", "Investment in government securities", "Deposit mobilization limits"],
@@ -782,6 +867,7 @@
                 options: ["25% of capital funds", "35% of capital funds", "40% of capital funds", "50% of capital funds"],
                 correct: 2
             },
+            // RBI Supervision
             {
                 question: "What is the role of RBI in NBFC regulation?",
                 options: ["Only registration", "Registration, regulation, and supervision", "Only supervision", "Advisory role only"],
@@ -791,8 +877,276 @@
                 question: "What is the timeline for periodic reporting to RBI for NBFC-Middle Layer?",
                 options: ["Monthly", "Quarterly", "Half-yearly", "Annually"],
                 correct: 1
+            },
+            // Additional Questions - Registration
+            {
+                question: "Under which section of RBI Act, 1934 does RBI register NBFCs?",
+                options: ["Section 35", "Section 42", "Section 45-IA", "Section 56"],
+                correct: 2
+            },
+            {
+                question: "What is the validity period of NBFC registration certificate?",
+                options: ["5 years", "10 years", "Valid until cancelled", "3 years"],
+                correct: 2
+            },
+            {
+                question: "Can an NBFC commence business before obtaining CoR from RBI?",
+                options: ["Yes, after filing application", "No, it must wait for CoR", "Yes, with provisional permission", "Yes, for first 6 months"],
+                correct: 1
+            },
+            // Additional Questions - Deposits
+            {
+                question: "What is the maximum interest rate an NBFC-D can offer on public deposits?",
+                options: ["Fixed by RBI from time to time", "12.5% per annum", "No restriction", "As per bank rate plus 3%"],
+                correct: 0
+            },
+            {
+                question: "What is the Liquid Asset requirement for NBFC-D?",
+                options: ["10% of public deposits", "15% of public deposits", "20% of public deposits", "25% of public deposits"],
+                correct: 1
+            },
+            {
+                question: "Which of the following cannot be accepted as public deposit by an NBFC?",
+                options: ["Deposit with maturity of 2 years", "Deposit with maturity of 6 months", "Deposit from directors", "Deposit with maturity of 5 years"],
+                correct: 1
+            },
+            // Additional Questions - NBFC Types
+            {
+                question: "What is an NBFC-ND-SI?",
+                options: ["Non-Deposit taking NBFC - Systemically Important", "Non-Deposit NBFC - Standard Institution", "New Deposit NBFC - Special Investment", "National Deposit NBFC - Standard Institution"],
+                correct: 0
+            },
+            {
+                question: "What is NBFC-IFC?",
+                options: ["Investment Finance Company", "Infrastructure Finance Company", "International Finance Company", "Industrial Finance Company"],
+                correct: 1
+            },
+            {
+                question: "What is an NBFC-CIC?",
+                options: ["Core Investment Company", "Credit Investment Company", "Central Investment Corporation", "Capital Investment Company"],
+                correct: 0
+            },
+            {
+                question: "What percentage of assets should be invested in group companies for an NBFC to qualify as CIC?",
+                options: ["50%", "70%", "90%", "100%"],
+                correct: 2
+            },
+            // Additional Questions - NBFC-MFI
+            {
+                question: "What is the maximum household income limit for rural borrowers in NBFC-MFI?",
+                options: ["Rs. 1,00,000", "Rs. 1,25,000", "Rs. 1,50,000", "Rs. 2,00,000"],
+                correct: 1
+            },
+            {
+                question: "What is the maximum household income limit for urban borrowers in NBFC-MFI?",
+                options: ["Rs. 1,50,000", "Rs. 2,00,000", "Rs. 2,50,000", "Rs. 3,00,000"],
+                correct: 1
+            },
+            {
+                question: "What is the maximum number of lenders that can lend to a single NBFC-MFI borrower?",
+                options: ["2", "3", "4", "No limit"],
+                correct: 2
+            },
+            {
+                question: "What is the minimum moratorium period for NBFC-MFI loans?",
+                options: ["No moratorium required", "1 month", "15 days", "2 months"],
+                correct: 0
+            },
+            // Additional Questions - Capital
+            {
+                question: "What is leverage ratio?",
+                options: ["Debt to equity ratio", "Tier 1 capital to total exposure", "Total assets to net worth", "Borrowings to deposits"],
+                correct: 1
+            },
+            {
+                question: "What is the maximum leverage for NBFC-ICC in Middle Layer?",
+                options: ["5 times", "7 times", "10 times", "No specific limit"],
+                correct: 1
+            },
+            {
+                question: "What is included in Net Owned Fund (NOF)?",
+                options: ["Paid-up capital and free reserves minus intangible assets", "Only paid-up capital", "Total assets", "Total liabilities"],
+                correct: 0
+            },
+            // Additional Questions - Prudential Norms
+            {
+                question: "What is the purpose of Income Recognition norms?",
+                options: ["Tax calculation", "Determining when income should be recognized in books", "Employee bonus calculation", "Dividend declaration"],
+                correct: 1
+            },
+            {
+                question: "Can income be recognized on NPA?",
+                options: ["Yes, always", "No, income should be recognized only on actual receipt", "Yes, on accrual basis", "Only for secured NPAs"],
+                correct: 1
+            },
+            {
+                question: "What is restructuring of advances?",
+                options: ["Changing collateral", "Changing terms of loan due to borrower difficulty", "Increasing loan amount", "Changing borrower"],
+                correct: 1
+            },
+            // Additional Questions - Fair Practices
+            {
+                question: "What should be disclosed in the loan agreement as per FPC?",
+                options: ["Only interest rate", "All terms and conditions including fees and charges", "Only repayment schedule", "Only collateral details"],
+                correct: 1
+            },
+            {
+                question: "What is the time limit for disposal of loan applications?",
+                options: ["7 days", "15 days", "30 days", "Within reasonable time as decided by Board"],
+                correct: 3
+            },
+            {
+                question: "What is the requirement for loan rejection?",
+                options: ["No requirement", "Rejection must be communicated with reasons in writing", "Oral communication is sufficient", "Only for large loans"],
+                correct: 1
+            },
+            // Additional Questions - Outsourcing
+            {
+                question: "Can NBFCs outsource core management functions?",
+                options: ["Yes, all functions", "No, core management functions cannot be outsourced", "Only with RBI permission", "Only to group companies"],
+                correct: 1
+            },
+            {
+                question: "What is the responsibility for outsourced activities?",
+                options: ["Transferred to service provider", "NBFC remains responsible", "Shared equally", "No responsibility"],
+                correct: 1
+            },
+            // Additional Questions - IT and Cyber Security
+            {
+                question: "What is the requirement for cyber security framework in NBFCs?",
+                options: ["Optional", "Mandatory for all NBFCs in Middle and Upper Layer", "Only for deposit-taking NBFCs", "Only for NBFCs with foreign investment"],
+                correct: 1
+            },
+            {
+                question: "What is the timeline for reporting cyber incidents to RBI?",
+                options: ["Within 24 hours", "Within 6 hours", "Within 48 hours", "Within 7 days"],
+                correct: 1
+            },
+            // Additional Questions - P2P Lending
+            {
+                question: "What is the maximum loan tenure in P2P lending?",
+                options: ["12 months", "24 months", "36 months", "60 months"],
+                correct: 2
+            },
+            {
+                question: "Can P2P platforms provide credit guarantee?",
+                options: ["Yes", "No, they cannot provide any guarantee", "Only for secured loans", "Only with RBI permission"],
+                correct: 1
+            },
+            {
+                question: "What is the role of P2P platform?",
+                options: ["To lend money", "To act as intermediary between lenders and borrowers", "To accept deposits", "To provide insurance"],
+                correct: 1
+            },
+            // Additional Questions - Account Aggregator
+            {
+                question: "What is the core function of an Account Aggregator?",
+                options: ["Lending money", "Consent-based sharing of financial data", "Accepting deposits", "Providing investment advice"],
+                correct: 1
+            },
+            {
+                question: "Can Account Aggregators store customer data?",
+                options: ["Yes, permanently", "No, they can only transmit data", "Yes, for 5 years", "Only encrypted data"],
+                correct: 1
+            },
+            // Additional Questions - Recovery
+            {
+                question: "What is the DRT threshold for NBFCs to file recovery cases?",
+                options: ["Rs. 10 lakh", "Rs. 20 lakh", "Rs. 50 lakh", "Rs. 1 crore"],
+                correct: 1
+            },
+            {
+                question: "What is the SARFAESI threshold for NBFCs?",
+                options: ["Rs. 1 lakh", "Rs. 10 lakh", "Rs. 20 lakh", "Rs. 50 lakh"],
+                correct: 2
+            },
+            {
+                question: "What notice period must be given under SARFAESI before taking possession?",
+                options: ["30 days", "60 days", "90 days", "15 days"],
+                correct: 1
+            },
+            // Additional Questions - Reporting
+            {
+                question: "What is NBS-7 return?",
+                options: ["Monthly return for deposit taking NBFCs", "Annual audited accounts return", "Quarterly return on prudential norms", "Capital adequacy return"],
+                correct: 2
+            },
+            {
+                question: "What is the purpose of CRILC reporting?",
+                options: ["Tax reporting", "Central Repository of Information on Large Credits", "Customer complaint reporting", "Cyber incident reporting"],
+                correct: 1
+            },
+            {
+                question: "What is the threshold for CRILC reporting?",
+                options: ["Rs. 1 crore", "Rs. 5 crore", "Rs. 10 crore", "Rs. 50 crore"],
+                correct: 1
+            },
+            // Additional Questions - Miscellaneous
+            {
+                question: "What is the ombudsman scheme for NBFCs?",
+                options: ["Internal grievance mechanism", "RBI scheme for customer complaint redressal", "External audit mechanism", "Employee grievance mechanism"],
+                correct: 1
+            },
+            {
+                question: "What is the time limit for resolving customer complaints at NBFC level?",
+                options: ["7 days", "15 days", "30 days", "45 days"],
+                correct: 2
+            },
+            {
+                question: "What is co-lending model?",
+                options: ["Two NBFCs lending together", "Banks and NBFCs jointly lending based on prior agreement", "Multiple borrowers sharing loan", "Government and NBFC lending together"],
+                correct: 1
+            },
+            {
+                question: "What is the minimum share of bank in co-lending arrangement?",
+                options: ["10%", "20%", "50%", "80%"],
+                correct: 1
+            },
+            {
+                question: "What is Digital Lending?",
+                options: ["Lending through physical branches", "Lending through online/digital platforms", "Lending to digital companies", "Lending for digital equipment"],
+                correct: 1
+            },
+            {
+                question: "Who are Lending Service Providers (LSPs) in digital lending?",
+                options: ["Banks only", "Agents/aggregators providing lending services on behalf of REs", "NBFCs only", "Government agencies"],
+                correct: 1
+            },
+            {
+                question: "What is First Loss Default Guarantee (FLDG)?",
+                options: ["Insurance product", "Guarantee by LSP to compensate lender for default up to certain percentage", "Government guarantee", "Bank guarantee"],
+                correct: 1
+            },
+            {
+                question: "What is the maximum FLDG limit as per RBI guidelines?",
+                options: ["2%", "5%", "10%", "15%"],
+                correct: 1
+            },
+            {
+                question: "What is the priority sector lending requirement for NBFCs?",
+                options: ["40% of ANBC", "No mandatory requirement for all NBFCs", "25% of total loans", "50% of deposits"],
+                correct: 1
+            },
+            {
+                question: "What is ANBC?",
+                options: ["Annual Net Business Cost", "Adjusted Net Bank Credit", "Average Net Banking Capital", "Annual Net Business Credit"],
+                correct: 1
             }
         ];
+
+        // Shuffle function using Fisher-Yates algorithm
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        // Select random questions for each test
+        const QUESTIONS_PER_TEST = 50;
+        let questions = [];
 
         let currentQuestion = 0;
         let userAnswers = new Array(questions.length).fill(null);
@@ -800,6 +1154,11 @@
         let reviewMode = false;
 
         function startTest() {
+            // Shuffle and select random questions each time
+            questions = shuffleArray(questionBank).slice(0, QUESTIONS_PER_TEST);
+            userAnswers = new Array(questions.length).fill(null);
+            currentQuestion = 0;
+
             document.getElementById('startScreen').classList.add('hidden');
             document.getElementById('testScreen').classList.remove('hidden');
             testStarted = true;
@@ -961,6 +1320,8 @@
         }
 
         function restartTest() {
+            // Re-shuffle and select new random questions for each restart
+            questions = shuffleArray(questionBank).slice(0, QUESTIONS_PER_TEST);
             currentQuestion = 0;
             userAnswers = new Array(questions.length).fill(null);
             reviewMode = false;
