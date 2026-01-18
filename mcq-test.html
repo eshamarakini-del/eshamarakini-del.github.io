@@ -451,8 +451,8 @@
     <div class="container">
         <!-- Start Screen -->
         <div id="startScreen" class="start-screen">
-            <h1>Knowledge Assessment</h1>
-            <p>Test your knowledge with this comprehensive 50-question assessment covering various topics including programming, web development, and general knowledge.</p>
+            <h1>NBFC Knowledge Assessment</h1>
+            <p>Test your knowledge with this comprehensive 50-question assessment covering Non-Banking Financial Companies (NBFCs) - regulations, types, compliance, and governance.</p>
             <div class="test-info">
                 <div class="info-item">
                     <div class="value">50</div>
@@ -473,7 +473,7 @@
         <!-- Test Screen -->
         <div id="testScreen" class="hidden">
             <div class="test-header">
-                <h1>Knowledge Assessment</h1>
+                <h1>NBFC Knowledge Assessment</h1>
             </div>
 
             <div class="progress-bar">
@@ -543,254 +543,254 @@
     <script>
         const questions = [
             {
-                question: "What does HTML stand for?",
-                options: ["Hyper Text Markup Language", "High Tech Modern Language", "Hyper Transfer Markup Language", "Home Tool Markup Language"],
+                question: "What does NBFC stand for?",
+                options: ["Non-Banking Financial Company", "National Banking Finance Corporation", "Non-Business Financial Corporation", "National Business Finance Company"],
                 correct: 0
             },
             {
-                question: "Which CSS property is used to change the text color?",
-                options: ["font-color", "text-color", "color", "text-style"],
-                correct: 2
-            },
-            {
-                question: "What is the correct JavaScript syntax to change the content of an HTML element?",
-                options: ["document.getElement('p').innerHTML = 'Hello'", "document.getElementById('p').innerHTML = 'Hello'", "#p.innerHTML = 'Hello'", "document.getElementByName('p').innerHTML = 'Hello'"],
+                question: "Which Act governs the registration and regulation of NBFCs in India?",
+                options: ["Banking Regulation Act, 1949", "Reserve Bank of India Act, 1934", "Companies Act, 2013", "SEBI Act, 1992"],
                 correct: 1
             },
             {
-                question: "Which HTML tag is used to define an internal style sheet?",
-                options: ["<css>", "<style>", "<script>", "<styles>"],
+                question: "What is the minimum Net Owned Fund (NOF) required for registration of an NBFC?",
+                options: ["Rs. 1 crore", "Rs. 2 crore", "Rs. 5 crore", "Rs. 10 crore"],
                 correct: 1
             },
             {
-                question: "What does CSS stand for?",
-                options: ["Creative Style Sheets", "Cascading Style Sheets", "Computer Style Sheets", "Colorful Style Sheets"],
-                correct: 1
-            },
-            {
-                question: "Which property is used to change the background color in CSS?",
-                options: ["bgcolor", "color", "background-color", "background"],
-                correct: 2
-            },
-            {
-                question: "What is the correct HTML element for inserting a line break?",
-                options: ["<break>", "<lb>", "<br>", "<newline>"],
-                correct: 2
-            },
-            {
-                question: "Which JavaScript method is used to write content to the browser console?",
-                options: ["console.write()", "console.log()", "console.output()", "console.print()"],
-                correct: 1
-            },
-            {
-                question: "What is the purpose of the 'alt' attribute in an <img> tag?",
-                options: ["To specify the image alignment", "To provide alternative text for the image", "To set the image altitude", "To define the image style"],
-                correct: 1
-            },
-            {
-                question: "Which operator is used for strict equality comparison in JavaScript?",
-                options: ["==", "===", "=", "!="],
-                correct: 1
-            },
-            {
-                question: "What does API stand for?",
-                options: ["Application Programming Interface", "Advanced Programming Integration", "Application Process Integration", "Automated Programming Interface"],
-                correct: 0
-            },
-            {
-                question: "Which HTTP method is typically used to retrieve data from a server?",
-                options: ["POST", "PUT", "GET", "DELETE"],
-                correct: 2
-            },
-            {
-                question: "What is the default position value in CSS?",
-                options: ["relative", "absolute", "fixed", "static"],
+                question: "Which of the following is NOT a type of NBFC?",
+                options: ["NBFC-ICC", "NBFC-MFI", "NBFC-Factor", "NBFC-Retail"],
                 correct: 3
             },
             {
-                question: "Which HTML attribute specifies an alternate text for an image if the image cannot be displayed?",
-                options: ["title", "src", "alt", "longdesc"],
-                correct: 2
-            },
-            {
-                question: "What is the correct way to declare a JavaScript variable?",
-                options: ["variable x;", "v x;", "let x;", "declare x;"],
-                correct: 2
-            },
-            {
-                question: "Which CSS property controls the text size?",
-                options: ["text-size", "font-size", "text-style", "font-style"],
-                correct: 1
-            },
-            {
-                question: "What is the purpose of the <head> element in HTML?",
-                options: ["To display the header of a page", "To contain metadata about the document", "To create a heading", "To define the top section of content"],
-                correct: 1
-            },
-            {
-                question: "Which JavaScript function is used to parse a string to an integer?",
-                options: ["Integer.parse()", "parseInteger()", "parseInt()", "Number.parseInt()"],
-                correct: 2
-            },
-            {
-                question: "What is the box model in CSS?",
-                options: ["A 3D rendering model", "A model that wraps content, padding, border, and margin", "A flexbox layout system", "A grid system"],
-                correct: 1
-            },
-            {
-                question: "Which HTML tag is used to define a table row?",
-                options: ["<td>", "<tr>", "<th>", "<table>"],
-                correct: 1
-            },
-            {
-                question: "What does JSON stand for?",
-                options: ["JavaScript Object Notation", "Java Standard Object Notation", "JavaScript Oriented Notation", "Java Syntax Object Notation"],
+                question: "What is the principal business criteria for an NBFC?",
+                options: ["Financial assets must be more than 50% of total assets and income from financial assets must be more than 50% of gross income", "Financial assets must be 100% of total assets", "Income from financial assets must be 75% of gross income", "Total assets must exceed Rs. 500 crore"],
                 correct: 0
             },
             {
-                question: "Which CSS property is used to make text bold?",
-                options: ["text-weight", "font-weight", "bold", "text-style"],
-                correct: 1
-            },
-            {
-                question: "What is the correct HTML for creating a hyperlink?",
-                options: ["<a url='http://example.com'>", "<a href='http://example.com'>", "<link href='http://example.com'>", "<hyperlink='http://example.com'>"],
-                correct: 1
-            },
-            {
-                question: "Which JavaScript keyword is used to declare a constant?",
-                options: ["const", "constant", "let", "final"],
+                question: "What does NBFC-ICC stand for?",
+                options: ["Investment and Credit Company", "Insurance and Credit Corporation", "Investment and Capital Corporation", "Insurance and Capital Company"],
                 correct: 0
             },
             {
-                question: "What is the purpose of the z-index property in CSS?",
-                options: ["To set the zoom level", "To control the stacking order of elements", "To set the element size", "To define the z-axis rotation"],
+                question: "Which NBFCs are allowed to accept public deposits?",
+                options: ["All NBFCs registered with RBI", "Only those with specific authorization from RBI", "Only NBFCs with NOF above Rs. 100 crore", "No NBFCs can accept public deposits"],
                 correct: 1
             },
             {
-                question: "Which HTML element is used for the largest heading?",
-                options: ["<h6>", "<heading>", "<h1>", "<head>"],
+                question: "What is the maximum period for which an NBFC-D can accept deposits?",
+                options: ["36 months", "48 months", "60 months", "84 months"],
                 correct: 2
             },
             {
-                question: "What does the 'this' keyword refer to in JavaScript?",
-                options: ["The previous object", "The current object", "The global object always", "The parent object"],
+                question: "What is the minimum period for which an NBFC-D can accept deposits?",
+                options: ["6 months", "12 months", "24 months", "36 months"],
                 correct: 1
             },
             {
-                question: "Which CSS property is used to add shadows to elements?",
-                options: ["shadow", "element-shadow", "box-shadow", "text-shadow"],
-                correct: 2
-            },
-            {
-                question: "What is the correct way to comment in JavaScript?",
-                options: ["<!-- comment -->", "// comment", "** comment **", "# comment"],
-                correct: 1
-            },
-            {
-                question: "Which HTTP status code indicates a successful response?",
-                options: ["404", "500", "200", "301"],
-                correct: 2
-            },
-            {
-                question: "What does DOM stand for?",
-                options: ["Document Object Model", "Data Object Management", "Digital Ordinance Model", "Document Orientation Model"],
+                question: "What is an NBFC-MFI?",
+                options: ["Micro Finance Institution", "Major Finance Institution", "Medium Finance Institution", "Mutual Fund Institution"],
                 correct: 0
             },
             {
-                question: "Which CSS display value makes an element a flex container?",
-                options: ["flexbox", "flex", "flexible", "flex-container"],
+                question: "What percentage of the total assets of NBFC-MFI should be in the nature of qualifying assets?",
+                options: ["50%", "65%", "75%", "85%"],
+                correct: 3
+            },
+            {
+                question: "What is the maximum loan amount that can be given by an NBFC-MFI for income generation purposes?",
+                options: ["Rs. 50,000", "Rs. 75,000", "Rs. 1,00,000", "Rs. 1,25,000"],
+                correct: 3
+            },
+            {
+                question: "What is a Systemically Important NBFC (NBFC-SI)?",
+                options: ["NBFC with asset size of Rs. 100 crore and above", "NBFC with asset size of Rs. 500 crore and above", "NBFC with asset size of Rs. 1000 crore and above", "Any NBFC accepting public deposits"],
                 correct: 1
             },
             {
-                question: "What is the purpose of the <meta> tag in HTML?",
-                options: ["To display metadata on the page", "To provide metadata about the HTML document", "To create meta links", "To define metal styling"],
-                correct: 1
-            },
-            {
-                question: "Which JavaScript method adds an element to the end of an array?",
-                options: ["append()", "push()", "add()", "insert()"],
-                correct: 1
-            },
-            {
-                question: "What is responsive web design?",
-                options: ["Design that responds to user clicks", "Design that adapts to different screen sizes", "Design that responds quickly", "Design with response forms"],
-                correct: 1
-            },
-            {
-                question: "Which HTML element is used to define important text?",
-                options: ["<important>", "<b>", "<strong>", "<i>"],
+                question: "What is the minimum CRAR (Capital to Risk Weighted Assets Ratio) for NBFCs?",
+                options: ["9%", "12%", "15%", "18%"],
                 correct: 2
             },
             {
-                question: "What is the purpose of the 'use strict' directive in JavaScript?",
-                options: ["To enable strict mode for catching common coding mistakes", "To use strict typing", "To restrict variable usage", "To enable strict CSS parsing"],
+                question: "What is Tier I capital for an NBFC?",
+                options: ["Subordinated debt only", "Paid-up equity capital, free reserves, and certain other components minus intangible assets", "Only retained earnings", "Deposits from public"],
+                correct: 1
+            },
+            {
+                question: "What is the asset classification norm for Standard Assets in NBFCs?",
+                options: ["No overdue payments", "Overdue for less than 90 days", "Overdue for less than 180 days", "Overdue for less than 30 days"],
+                correct: 1
+            },
+            {
+                question: "When does an asset become a Non-Performing Asset (NPA) for an NBFC?",
+                options: ["When overdue for 30 days", "When overdue for 60 days", "When overdue for 90 days", "When overdue for 180 days"],
+                correct: 2
+            },
+            {
+                question: "What is a Sub-standard Asset?",
+                options: ["An asset which has remained NPA for a period less than or equal to 12 months", "An asset which has remained NPA for more than 12 months", "An asset where loss has been identified but not written off", "A standard asset with potential weakness"],
                 correct: 0
             },
             {
-                question: "Which CSS property is used to control the space between lines of text?",
-                options: ["spacing", "line-height", "text-spacing", "line-spacing"],
+                question: "What is a Doubtful Asset?",
+                options: ["An asset which has remained in sub-standard category for 12 months", "An asset overdue for 90 days", "An asset with 50% provision", "A restructured asset"],
+                correct: 0
+            },
+            {
+                question: "What is the provisioning requirement for Standard Assets for NBFC-ICC?",
+                options: ["0.25%", "0.40%", "0.50%", "1.00%"],
                 correct: 1
             },
             {
-                question: "What is the correct HTML for making a checkbox?",
-                options: ["<input type='check'>", "<input type='checkbox'>", "<checkbox>", "<input type='tick'>"],
+                question: "What is the provisioning requirement for Sub-standard Assets for NBFCs?",
+                options: ["5%", "10%", "15%", "20%"],
                 correct: 1
             },
             {
-                question: "Which JavaScript method is used to remove the last element from an array?",
-                options: ["removeLast()", "pop()", "delete()", "splice()"],
-                correct: 1
-            },
-            {
-                question: "What does URL stand for?",
-                options: ["Universal Resource Locator", "Uniform Resource Locator", "United Resource Link", "Universal Reference Locator"],
-                correct: 1
-            },
-            {
-                question: "Which CSS property is used to create rounded corners?",
-                options: ["corner-radius", "border-radius", "rounded-corners", "corner-style"],
-                correct: 1
-            },
-            {
-                question: "What is the purpose of the <form> element in HTML?",
-                options: ["To format text", "To create a container for input elements", "To display a formatted document", "To define form styling"],
-                correct: 1
-            },
-            {
-                question: "Which JavaScript loop is best for iterating over object properties?",
-                options: ["for loop", "while loop", "for...in loop", "do...while loop"],
+                question: "Which regulatory framework covers KYC norms for NBFCs?",
+                options: ["Master Direction on KYC", "PMLA, 2002", "Both A and B", "Companies Act, 2013"],
                 correct: 2
             },
             {
-                question: "What is the CSS property to hide an element but keep its space?",
-                options: ["display: none", "visibility: hidden", "opacity: 0", "hidden: true"],
+                question: "What is Customer Due Diligence (CDD)?",
+                options: ["Collecting customer feedback", "Identifying and verifying customer identity", "Providing loans to customers", "Filing returns with RBI"],
                 correct: 1
             },
             {
-                question: "Which HTML tag is used to define an unordered list?",
-                options: ["<ol>", "<list>", "<ul>", "<li>"],
-                correct: 2
-            },
-            {
-                question: "What is an event listener in JavaScript?",
-                options: ["A function that listens to audio events", "A procedure that waits for an event to occur", "A method to listen to server events", "A function that creates events"],
+                question: "What is Enhanced Due Diligence (EDD)?",
+                options: ["Standard KYC procedures", "Additional scrutiny for high-risk customers", "Basic identity verification", "Annual review of accounts"],
                 correct: 1
             },
             {
-                question: "Which CSS property specifies the transparency of an element?",
-                options: ["transparency", "opacity", "visibility", "filter"],
+                question: "What is the threshold for reporting Suspicious Transaction Reports (STRs)?",
+                options: ["Rs. 10 lakh", "Rs. 50 lakh", "No threshold - based on nature of transaction", "Rs. 1 crore"],
+                correct: 2
+            },
+            {
+                question: "What is the threshold for Cash Transaction Reports (CTRs)?",
+                options: ["Rs. 5 lakh", "Rs. 10 lakh", "Rs. 15 lakh", "Rs. 20 lakh"],
                 correct: 1
             },
             {
-                question: "What is the correct HTML for creating a dropdown list?",
-                options: ["<list>", "<dropdown>", "<select>", "<input type='dropdown'>"],
+                question: "What is the Fair Practices Code (FPC)?",
+                options: ["Code for employee conduct", "Code for fair and transparent dealing with customers", "Code for regulatory compliance", "Code for internal audit"],
+                correct: 1
+            },
+            {
+                question: "What is the purpose of SARFAESI Act?",
+                options: ["Registration of NBFCs", "Recovery of dues without court intervention", "Accepting public deposits", "Granting loans to priority sector"],
+                correct: 1
+            },
+            {
+                question: "What is an NBFC-Factor?",
+                options: ["An NBFC whose principal business is factoring", "An NBFC dealing in insurance", "An NBFC providing housing finance", "An NBFC dealing in securities"],
+                correct: 0
+            },
+            {
+                question: "What is the definition of factoring activity?",
+                options: ["Purchasing receivables from sellers of goods/services", "Providing housing loans", "Accepting deposits", "Trading in securities"],
+                correct: 0
+            },
+            {
+                question: "What is an NBFC-P2P (Peer to Peer Lending Platform)?",
+                options: ["Platform providing loans to individuals only", "Online platform bringing lenders and borrowers together", "Platform for share trading", "Platform for insurance distribution"],
+                correct: 1
+            },
+            {
+                question: "What is the maximum exposure a lender can have across all P2P platforms?",
+                options: ["Rs. 10 lakh", "Rs. 25 lakh", "Rs. 50 lakh", "Rs. 1 crore"],
                 correct: 2
             },
             {
-                question: "Which JavaScript method is used to find an element by its ID?",
-                options: ["findById()", "getElement()", "getElementById()", "querySelector()"],
+                question: "What is an NBFC-AA (Account Aggregator)?",
+                options: ["Company that consolidates financial accounts", "Non-deposit taking NBFC engaged in consent-based data sharing", "Company that aggregates insurance policies", "Company that provides credit scores"],
+                correct: 1
+            },
+            {
+                question: "What is Scale Based Regulation (SBR) framework for NBFCs?",
+                options: ["Regulation based on geographical location", "Regulation based on type of customers", "Regulation based on size, activity, and perceived riskiness", "Regulation based on ownership pattern"],
                 correct: 2
+            },
+            {
+                question: "Under SBR, how many layers are NBFCs categorized into?",
+                options: ["Two", "Three", "Four", "Five"],
+                correct: 2
+            },
+            {
+                question: "What is the Base Layer in Scale Based Regulation?",
+                options: ["NBFCs with assets above Rs. 1000 crore", "Non-deposit taking NBFCs below Rs. 1000 crore asset size", "All deposit-taking NBFCs", "Systemically important NBFCs"],
+                correct: 1
+            },
+            {
+                question: "What is the Middle Layer in Scale Based Regulation?",
+                options: ["Base Layer NBFCs only", "Deposit-taking NBFCs, NBFCs with asset size of Rs. 1000 crore and above", "Only government NBFCs", "NBFCs with foreign investment"],
+                correct: 1
+            },
+            {
+                question: "What is NBFC-UL (Upper Layer)?",
+                options: ["Top 10 NBFCs by asset size plus NBFCs specifically identified by RBI", "All systemically important NBFCs", "NBFCs with foreign investment", "NBFCs accepting public deposits"],
+                correct: 0
+            },
+            {
+                question: "What is the minimum Tier 1 capital requirement for NBFC-UL?",
+                options: ["8%", "9%", "10%", "12%"],
+                correct: 2
+            },
+            {
+                question: "What is the Liquidity Coverage Ratio (LCR) requirement for non-deposit taking NBFCs with asset size Rs. 10,000 crore and above?",
+                options: ["50%", "60%", "85%", "100%"],
+                correct: 2
+            },
+            {
+                question: "What is the concept of Principal Officer in context of AML/CFT?",
+                options: ["CEO of the company", "Designated officer responsible for AML compliance", "External auditor", "Board chairman"],
+                correct: 1
+            },
+            {
+                question: "What is the Corporate Governance requirement for NBFCs in Upper Layer?",
+                options: ["No specific requirement", "Same as Middle Layer", "Governance standards comparable to banks", "Self-regulation"],
+                correct: 2
+            },
+            {
+                question: "What is NPA in the context of NBFCs?",
+                options: ["Net Profit After tax", "Non-Performing Asset", "New Payment Architecture", "National Payment Authorization"],
+                correct: 1
+            },
+            {
+                question: "What is the primary regulator for Housing Finance Companies (HFCs)?",
+                options: ["SEBI", "RBI", "NHB", "IRDAI"],
+                correct: 1
+            },
+            {
+                question: "What is an Infrastructure Finance Company (IFC)?",
+                options: ["Any NBFC lending to infrastructure", "NBFC with minimum 75% of assets in infrastructure loans with minimum NOF of Rs. 300 crore", "Government company for infrastructure development", "NBFC registered under Companies Act only"],
+                correct: 1
+            },
+            {
+                question: "What is concentration norm?",
+                options: ["Minimum lending to priority sector", "Limits on exposure to single borrower or group of borrowers", "Investment in government securities", "Deposit mobilization limits"],
+                correct: 1
+            },
+            {
+                question: "What is the single borrower exposure limit for NBFCs?",
+                options: ["10% of capital funds", "15% of capital funds", "20% of capital funds", "25% of capital funds"],
+                correct: 3
+            },
+            {
+                question: "What is the group borrower exposure limit for NBFCs?",
+                options: ["25% of capital funds", "35% of capital funds", "40% of capital funds", "50% of capital funds"],
+                correct: 2
+            },
+            {
+                question: "What is the role of RBI in NBFC regulation?",
+                options: ["Only registration", "Registration, regulation, and supervision", "Only supervision", "Advisory role only"],
+                correct: 1
+            },
+            {
+                question: "What is the timeline for periodic reporting to RBI for NBFC-Middle Layer?",
+                options: ["Monthly", "Quarterly", "Half-yearly", "Annually"],
+                correct: 1
             }
         ];
 
