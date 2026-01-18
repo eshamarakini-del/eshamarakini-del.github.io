@@ -1174,11 +1174,27 @@
             document.getElementById('currentScore').textContent = `Score: ${calculateScore()}`;
             document.getElementById('questionText').textContent = question.question;
 
+            const isAnswered = answeredQuestions.has(currentQuestion);
+            const userAnswer = userAnswers[currentQuestion];
+            const correctIndex = question.correct;
+
             const optionsHtml = question.options.map((option, index) => {
                 const letters = ['A', 'B', 'C', 'D'];
-                const selectedClass = userAnswers[currentQuestion] === index ? 'selected' : '';
+                let optionClass = '';
+                let pointerStyle = '';
+
+                if (isAnswered) {
+                    pointerStyle = 'pointer-events: none;';
+                    if (index === correctIndex) {
+                        optionClass = 'correct';
+                    }
+                    if (index === userAnswer && userAnswer !== correctIndex) {
+                        optionClass = 'incorrect';
+                    }
+                }
+
                 return `
-                    <label class="option ${selectedClass}" onclick="selectOption(${index})">
+                    <label class="option ${optionClass}" onclick="selectOption(${index})" style="${pointerStyle}">
                         <input type="radio" name="answer" value="${index}">
                         <span class="option-label">
                             <span class="option-letter">${letters[index]}</span>
@@ -1199,15 +1215,37 @@
             }
         }
 
+        // Track which questions have been answered (to prevent re-answering)
+        let answeredQuestions = new Set();
+
         function selectOption(index) {
+            // If already answered, don't allow changing
+            if (answeredQuestions.has(currentQuestion)) {
+                return;
+            }
+
             userAnswers[currentQuestion] = index;
+            answeredQuestions.add(currentQuestion);
+
+            const correctIndex = questions[currentQuestion].correct;
+            const isCorrect = index === correctIndex;
 
             document.querySelectorAll('.option').forEach((opt, i) => {
                 opt.classList.remove('selected');
-                if (i === index) {
-                    opt.classList.add('selected');
+                opt.style.pointerEvents = 'none'; // Disable clicking after answer
+
+                if (i === correctIndex) {
+                    // Always show correct answer in green
+                    opt.classList.add('correct');
+                }
+                if (i === index && !isCorrect) {
+                    // Show wrong selection in red
+                    opt.classList.add('incorrect');
                 }
             });
+
+            // Update score immediately
+            document.getElementById('currentScore').textContent = `Score: ${calculateScore()}`;
         }
 
         function prevQuestion() {
@@ -1324,6 +1362,7 @@
             questions = shuffleArray(questionBank).slice(0, QUESTIONS_PER_TEST);
             currentQuestion = 0;
             userAnswers = new Array(questions.length).fill(null);
+            answeredQuestions = new Set(); // Reset answered tracking
             reviewMode = false;
 
             document.getElementById('startScreen').classList.remove('hidden');
