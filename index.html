@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NBFC Workspace - Your Personal Knowledge Hub</title>
+    <title>NBFC Workspace - Your NBFC Learning Hub</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -15,25 +15,35 @@
         }
 
         :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #fafafa;
-            --text-primary: #0a0a0a;
-            --text-secondary: #666666;
-            --border: #e8e8e8;
-            --accent: #0a0a0a;
+            --bg-primary: #FDFCFA;
+            --bg-secondary: #F7F5F2;
+            --bg-card: #FFFFFF;
+            --text-primary: #1a1a1a;
+            --text-secondary: #5c5c5c;
+            --text-muted: #8a8a8a;
+            --border: #e5e2dd;
+            --accent: #d95d0f;
+            --accent-light: #fff4ed;
+            --accent-secondary: #2563eb;
+            --accent-tertiary: #059669;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+            --shadow-lg: 0 12px 32px rgba(0,0,0,0.08);
         }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
-            line-height: 1.6;
+            line-height: 1.7;
             -webkit-font-smoothing: antialiased;
         }
 
         /* Header */
         header {
-            background: var(--bg-primary);
+            background: rgba(253, 252, 250, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
@@ -41,9 +51,9 @@
         }
 
         nav {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 1.5rem 3rem;
+            padding: 1.25rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -51,22 +61,27 @@
 
         .logo {
             font-size: 1.125rem;
-            font-weight: 500;
+            font-weight: 600;
             letter-spacing: -0.02em;
+            color: var(--text-primary);
+        }
+
+        .logo span {
+            color: var(--accent);
         }
 
         .nav-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 0.75rem;
         }
 
         .btn {
-            padding: 0.625rem 1.5rem;
-            border-radius: 6px;
+            padding: 0.625rem 1.25rem;
+            border-radius: 8px;
             font-size: 0.9375rem;
             font-weight: 500;
             text-decoration: none;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             cursor: pointer;
             border: none;
         }
@@ -79,38 +94,61 @@
 
         .btn-secondary:hover {
             background: var(--bg-secondary);
+            border-color: var(--text-muted);
         }
 
         .btn-primary {
             background: var(--accent);
             color: white;
+            box-shadow: 0 2px 8px rgba(217, 93, 15, 0.25);
         }
 
         .btn-primary:hover {
-            opacity: 0.85;
+            background: #c45410;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(217, 93, 15, 0.3);
         }
 
         /* Hero Section */
         .hero {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 8rem 3rem 6rem;
+            padding: 6rem 2rem 5rem;
             text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent-light);
+            color: var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(217, 93, 15, 0.15);
         }
 
         .hero h1 {
             font-size: 3.5rem;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: -0.03em;
-            line-height: 1.1;
+            line-height: 1.15;
             margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, #444 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .hero p {
-            font-size: 1.375rem;
+            font-size: 1.25rem;
             color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 3rem;
+            max-width: 560px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
         }
 
         .hero-buttons {
@@ -121,136 +159,253 @@
         }
 
         .btn-large {
-            padding: 1rem 2rem;
-            font-size: 1.0625rem;
+            padding: 0.875rem 2rem;
+            font-size: 1rem;
         }
 
         /* Features Section */
         .features {
             background: var(--bg-secondary);
-            padding: 6rem 3rem;
+            padding: 5rem 2rem;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
         }
 
         .features-container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
-        .features h2 {
+        .section-header {
             text-align: center;
-            font-size: 2.5rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
             font-weight: 600;
             letter-spacing: -0.02em;
-            margin-bottom: 4rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.0625rem;
         }
 
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
+            gap: 1.5rem;
         }
 
         .feature-card {
-            text-align: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.75rem;
+            position: relative;
+            transition: all 0.25s ease;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--accent);
+            border-radius: 12px 0 0 12px;
+        }
+
+        .feature-card:nth-child(2)::before {
+            background: var(--accent-secondary);
+        }
+
+        .feature-card:nth-child(3)::before {
+            background: var(--accent-tertiary);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
         }
 
         .feature-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--bg-primary);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            margin: 0 auto 1.5rem;
+            width: 44px;
+            height: 44px;
+            background: var(--accent-light);
+            border-radius: 10px;
+            margin-bottom: 1.25rem;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.25rem;
-            font-weight: 500;
+        }
+
+        .feature-card:nth-child(2) .feature-icon {
+            background: #eff6ff;
+        }
+
+        .feature-card:nth-child(3) .feature-icon {
+            background: #ecfdf5;
         }
 
         .feature-card h3 {
-            font-size: 1.25rem;
-            font-weight: 500;
-            margin-bottom: 0.75rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
         }
 
         .feature-card p {
             color: var(--text-secondary);
-            font-size: 1rem;
+            font-size: 0.9375rem;
             line-height: 1.6;
+        }
+
+        /* Stats Section */
+        .stats {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 1.5rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
         }
 
         /* CTA Section */
         .cta {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 6rem 3rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, #2d2d2d 100%);
+            padding: 4rem 2rem;
             text-align: center;
+            margin: 0 2rem 3rem;
+            border-radius: 16px;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .cta h2 {
-            font-size: 2.5rem;
+            font-size: 1.75rem;
             font-weight: 600;
             letter-spacing: -0.02em;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
+            color: white;
         }
 
         .cta p {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            margin-bottom: 2.5rem;
+            font-size: 1.0625rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 2rem;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta .btn-primary {
+            background: white;
+            color: var(--text-primary);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+        }
+
+        .cta .btn-primary:hover {
+            background: var(--bg-secondary);
+            transform: translateY(-2px);
         }
 
         /* Footer */
         footer {
-            background: var(--bg-secondary);
+            background: var(--bg-primary);
             border-top: 1px solid var(--border);
-            padding: 3rem 3rem 2rem;
+            padding: 2.5rem 2rem;
             text-align: center;
         }
 
         footer p {
-            color: var(--text-secondary);
-            font-size: 0.9375rem;
+            color: var(--text-muted);
+            font-size: 0.875rem;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
             nav {
-                padding: 1.25rem 1.5rem;
+                padding: 1rem 1.25rem;
             }
 
             .hero {
-                padding: 4rem 1.5rem 3rem;
+                padding: 4rem 1.25rem 3rem;
             }
 
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.25rem;
             }
 
             .hero p {
-                font-size: 1.125rem;
+                font-size: 1.0625rem;
             }
 
             .features {
-                padding: 4rem 1.5rem;
+                padding: 3rem 1.25rem;
             }
 
-            .features h2 {
-                font-size: 2rem;
+            .section-header h2 {
+                font-size: 1.625rem;
             }
 
             .features-grid {
                 grid-template-columns: 1fr;
-                gap: 2rem;
+            }
+
+            .stats {
+                padding: 2.5rem 1.25rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .stat-item {
+                padding: 1rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
             }
 
             .cta {
-                padding: 4rem 1.5rem;
+                margin: 0 1rem 2rem;
+                padding: 3rem 1.5rem;
+                border-radius: 12px;
             }
 
             .cta h2 {
-                font-size: 2rem;
+                font-size: 1.5rem;
             }
 
             .hero-buttons {
@@ -260,7 +415,7 @@
 
             .btn-large {
                 width: 100%;
-                max-width: 300px;
+                max-width: 280px;
             }
         }
     </style>
@@ -269,7 +424,7 @@
     <!-- Header -->
     <header>
         <nav>
-            <div class="logo">NBFC Workspace</div>
+            <div class="logo">NBFC <span>Workspace</span></div>
             <div class="nav-buttons">
                 <a href="login.html" class="btn btn-primary">Sign In</a>
             </div>
@@ -278,15 +433,72 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <h1>NBFC Workspace</h1>
-        <div class="hero-buttons">
-            <a href="login.html" class="btn btn-primary btn-large">Sign In</a>
+        <div class="hero-badge">
+            <span>&#10024;</span> Your Complete NBFC Learning Platform
         </div>
+        <h1>Master NBFC Regulations<br>With Confidence</h1>
+        <p>A comprehensive workspace for learning Non-Banking Financial Company regulations, taking notes, and testing your knowledge.</p>
+        <div class="hero-buttons">
+            <a href="login.html" class="btn btn-primary btn-large">Get Started</a>
+            <a href="mcq-test.html" class="btn btn-secondary btn-large">Try Quiz</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="features-container">
+            <div class="section-header">
+                <h2>Everything you need to learn</h2>
+                <p>Tools designed for effective NBFC knowledge management</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">&#128218;</div>
+                    <h3>Personal Blog</h3>
+                    <p>Write and organize your notes, summaries, and insights about NBFC regulations and concepts.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128202;</div>
+                    <h3>MCQ Practice</h3>
+                    <p>Test your knowledge with 100+ questions covering all aspects of NBFC regulations and compliance.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128736;</div>
+                    <h3>Loan Tracker</h3>
+                    <p>Keep track of important dates, reminders, and loan-related information in one place.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">100+</div>
+                <div class="stat-label">Practice Questions</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50</div>
+                <div class="stat-label">Questions Per Test</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Learning Modules</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>Ready to start learning?</h2>
+        <p>Join now and master NBFC regulations with our comprehensive tools.</p>
+        <a href="login.html" class="btn btn-primary btn-large">Create Account</a>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 NBFC Workspace</p>
+        <p>&copy; 2025 NBFC Workspace. Built for learning.</p>
     </footer>
 </body>
 </html>
