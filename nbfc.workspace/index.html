@@ -138,24 +138,31 @@
         }
 
         .tab {
-            padding: 0.75rem 0;
+            padding: 0.75rem 1.25rem;
             font-size: 0.9375rem;
+            font-weight: 500;
             color: var(--text-secondary);
             background: none;
             border: none;
             cursor: pointer;
             border-bottom: 2px solid transparent;
-            transition: all 0.2s;
-            margin-right: 2rem;
+            transition: all 0.25s ease;
+            margin-right: 0.5rem;
+            border-radius: 8px 8px 0 0;
+            position: relative;
         }
 
         .tab:hover {
-            color: var(--text-primary);
+            color: var(--accent);
+            background: var(--accent-light);
+            transform: translateY(-3px) scale(1.05);
         }
 
         .tab.active {
-            color: var(--text-primary);
+            color: var(--accent);
             border-bottom-color: var(--accent);
+            background: var(--accent-light);
+            font-weight: 600;
         }
 
         .tab-content {
