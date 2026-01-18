@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Capital Workspace</title>
+    <title>Login - NBFC Workspace</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -203,7 +203,7 @@
 </head>
 <body>
     <div class="login-container">
-        <div class="logo"><a href="index.html">← Capital Workspace</a></div>
+        <div class="logo"><a href="index.html">← NBFC Workspace</a></div>
         
         <div class="login-card">
             <h1 id="formTitle">Welcome back</h1>
@@ -273,7 +273,7 @@
             
             if (isSignUp) {
                 formTitle.textContent = 'Create account';
-                formSubtitle.textContent = 'Sign up for Capital Workspace';
+                formSubtitle.textContent = 'Sign up for NBFC Workspace';
                 submitBtn.textContent = 'Sign Up';
                 switchText.textContent = 'Already have an account?';
                 switchLink.textContent = 'Sign in';
@@ -328,7 +328,7 @@
                         email: email,
                         userId: result.data.user.id 
                     }));
-                    window.location.href = 'capital-workspace.html';
+                    window.location.href = 'nbfc.workspace/';
                 }
                 
             } catch (error) {
@@ -351,7 +351,7 @@
                     email: user.email,
                     userId: user.id 
                 }));
-                window.location.href = 'capital-workspace.html';
+                window.location.href = 'nbfc.workspace/';
             }
         });
     </script>
