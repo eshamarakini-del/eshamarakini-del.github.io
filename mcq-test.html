@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Test - Capital Workspace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #fafafa;
+            --text-primary: #0a0a0a;
+            --text-secondary: #666666;
+            --border: #e8e8e8;
+            --accent: #0a0a0a;
+            --hover: #f5f5f5;
+            --success: #16a34a;
+            --error: #dc2626;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        header {
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.125rem;
+            font-weight: 500;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .header-right {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .back-btn {
+            padding: 0.5rem 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .back-btn:hover {
+            background: var(--hover);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 3rem 6rem;
+        }
+
+        .test-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .test-header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .test-header p {
+            color: var(--text-secondary);
+        }
+
+        .progress-bar {
+            background: var(--border);
+            height: 4px;
+            border-radius: 2px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: var(--accent);
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .question-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .question-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .question-text {
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option:hover {
+            border-color: var(--accent);
+            background: var(--hover);
+        }
+
+        .option.selected {
+            border-color: var(--accent);
+            background: var(--hover);
+        }
+
+        .option.correct {
+            border-color: var(--success);
+            background: #f0fdf4;
+        }
+
+        .option.incorrect {
+            border-color: var(--error);
+            background: #fef2f2;
+        }
+
+        .option input {
+            display: none;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .option-letter {
+            width: 28px;
+            height: 28px;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .option.selected .option-letter {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .option.correct .option-letter {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+
+        .option.incorrect .option-letter {
+            background: var(--error);
+            color: white;
+            border-color: var(--error);
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--bg-primary);
+            font-size: 0.9375rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            border-color: var(--accent);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-btn.primary {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .nav-btn.primary:hover {
+            opacity: 0.85;
+        }
+
+        /* Start Screen */
+        .start-screen {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .start-screen h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .start-screen p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .start-btn {
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .start-btn:hover {
+            opacity: 0.85;
+        }
+
+        .test-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-item .value {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .info-item .label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* Results Screen */
+        .results-screen {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .results-screen h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .score-circle {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 8px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem auto;
+        }
+
+        .score-circle.excellent {
+            border-color: var(--success);
+        }
+
+        .score-circle.good {
+            border-color: #f59e0b;
+        }
+
+        .score-circle.poor {
+            border-color: var(--error);
+        }
+
+        .score-number {
+            font-size: 3rem;
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .results-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .stat-value.correct {
+            color: var(--success);
+        }
+
+        .stat-value.incorrect {
+            color: var(--error);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .results-message {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .header-content,
+            .container {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+
+            .start-screen h1 {
+                font-size: 2rem;
+            }
+
+            .test-info {
+                gap: 1.5rem;
+            }
+
+            .results-stats {
+                gap: 2rem;
+            }
+
+            .navigation {
+                flex-direction: column;
+            }
+
+            .nav-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo"><a href="capital-workspace.html">Capital Workspace</a></div>
+            <div class="header-right">
+                <a href="capital-workspace.html" class="back-btn">Back to Workspace</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Start Screen -->
+        <div id="startScreen" class="start-screen">
+            <h1>Knowledge Assessment</h1>
+            <p>Test your knowledge with this comprehensive 50-question assessment covering various topics including programming, web development, and general knowledge.</p>
+            <div class="test-info">
+                <div class="info-item">
+                    <div class="value">50</div>
+                    <div class="label">Questions</div>
+                </div>
+                <div class="info-item">
+                    <div class="value">No</div>
+                    <div class="label">Time Limit</div>
+                </div>
+                <div class="info-item">
+                    <div class="value">1</div>
+                    <div class="label">Point Each</div>
+                </div>
+            </div>
+            <button class="start-btn" onclick="startTest()">Start Test</button>
+        </div>
+
+        <!-- Test Screen -->
+        <div id="testScreen" class="hidden">
+            <div class="test-header">
+                <h1>Knowledge Assessment</h1>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div class="question-info">
+                <span id="questionNumber">Question 1 of 50</span>
+                <span id="currentScore">Score: 0</span>
+            </div>
+
+            <div class="question-card">
+                <div class="question-text" id="questionText"></div>
+                <div class="options" id="optionsContainer"></div>
+            </div>
+
+            <div class="navigation">
+                <button class="nav-btn" id="prevBtn" onclick="prevQuestion()" disabled>Previous</button>
+                <button class="nav-btn primary" id="nextBtn" onclick="nextQuestion()">Next</button>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="resultsScreen" class="hidden results-screen">
+            <h1>Test Complete!</h1>
+            <div class="score-circle" id="scoreCircle">
+                <div class="score-number" id="finalScore">0%</div>
+                <div class="score-label">Score</div>
+            </div>
+            <div class="results-stats">
+                <div class="stat-item">
+                    <div class="stat-value correct" id="correctCount">0</div>
+                    <div class="stat-label">Correct</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value incorrect" id="incorrectCount">0</div>
+                    <div class="stat-label">Incorrect</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="unansweredCount">0</div>
+                    <div class="stat-label">Unanswered</div>
+                </div>
+            </div>
+            <p class="results-message" id="resultsMessage"></p>
+            <div class="results-actions">
+                <button class="nav-btn" onclick="reviewAnswers()">Review Answers</button>
+                <button class="nav-btn primary" onclick="restartTest()">Try Again</button>
+            </div>
+        </div>
+
+        <!-- Review Screen -->
+        <div id="reviewScreen" class="hidden">
+            <div class="test-header">
+                <h1>Review Answers</h1>
+                <p>See which questions you got right and wrong</p>
+            </div>
+
+            <div id="reviewContainer"></div>
+
+            <div class="navigation" style="margin-top: 2rem;">
+                <button class="nav-btn" onclick="backToResults()">Back to Results</button>
+                <button class="nav-btn primary" onclick="restartTest()">Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What does HTML stand for?",
+                options: ["Hyper Text Markup Language", "High Tech Modern Language", "Hyper Transfer Markup Language", "Home Tool Markup Language"],
+                correct: 0
+            },
+            {
+                question: "Which CSS property is used to change the text color?",
+                options: ["font-color", "text-color", "color", "text-style"],
+                correct: 2
+            },
+            {
+                question: "What is the correct JavaScript syntax to change the content of an HTML element?",
+                options: ["document.getElement('p').innerHTML = 'Hello'", "document.getElementById('p').innerHTML = 'Hello'", "#p.innerHTML = 'Hello'", "document.getElementByName('p').innerHTML = 'Hello'"],
+                correct: 1
+            },
+            {
+                question: "Which HTML tag is used to define an internal style sheet?",
+                options: ["<css>", "<style>", "<script>", "<styles>"],
+                correct: 1
+            },
+            {
+                question: "What does CSS stand for?",
+                options: ["Creative Style Sheets", "Cascading Style Sheets", "Computer Style Sheets", "Colorful Style Sheets"],
+                correct: 1
+            },
+            {
+                question: "Which property is used to change the background color in CSS?",
+                options: ["bgcolor", "color", "background-color", "background"],
+                correct: 2
+            },
+            {
+                question: "What is the correct HTML element for inserting a line break?",
+                options: ["<break>", "<lb>", "<br>", "<newline>"],
+                correct: 2
+            },
+            {
+                question: "Which JavaScript method is used to write content to the browser console?",
+                options: ["console.write()", "console.log()", "console.output()", "console.print()"],
+                correct: 1
+            },
+            {
+                question: "What is the purpose of the 'alt' attribute in an <img> tag?",
+                options: ["To specify the image alignment", "To provide alternative text for the image", "To set the image altitude", "To define the image style"],
+                correct: 1
+            },
+            {
+                question: "Which operator is used for strict equality comparison in JavaScript?",
+                options: ["==", "===", "=", "!="],
+                correct: 1
+            },
+            {
+                question: "What does API stand for?",
+                options: ["Application Programming Interface", "Advanced Programming Integration", "Application Process Integration", "Automated Programming Interface"],
+                correct: 0
+            },
+            {
+                question: "Which HTTP method is typically used to retrieve data from a server?",
+                options: ["POST", "PUT", "GET", "DELETE"],
+                correct: 2
+            },
+            {
+                question: "What is the default position value in CSS?",
+                options: ["relative", "absolute", "fixed", "static"],
+                correct: 3
+            },
+            {
+                question: "Which HTML attribute specifies an alternate text for an image if the image cannot be displayed?",
+                options: ["title", "src", "alt", "longdesc"],
+                correct: 2
+            },
+            {
+                question: "What is the correct way to declare a JavaScript variable?",
+                options: ["variable x;", "v x;", "let x;", "declare x;"],
+                correct: 2
+            },
+            {
+                question: "Which CSS property controls the text size?",
+                options: ["text-size", "font-size", "text-style", "font-style"],
+                correct: 1
+            },
+            {
+                question: "What is the purpose of the <head> element in HTML?",
+                options: ["To display the header of a page", "To contain metadata about the document", "To create a heading", "To define the top section of content"],
+                correct: 1
+            },
+            {
+                question: "Which JavaScript function is used to parse a string to an integer?",
+                options: ["Integer.parse()", "parseInteger()", "parseInt()", "Number.parseInt()"],
+                correct: 2
+            },
+            {
+                question: "What is the box model in CSS?",
+                options: ["A 3D rendering model", "A model that wraps content, padding, border, and margin", "A flexbox layout system", "A grid system"],
+                correct: 1
+            },
+            {
+                question: "Which HTML tag is used to define a table row?",
+                options: ["<td>", "<tr>", "<th>", "<table>"],
+                correct: 1
+            },
+            {
+                question: "What does JSON stand for?",
+                options: ["JavaScript Object Notation", "Java Standard Object Notation", "JavaScript Oriented Notation", "Java Syntax Object Notation"],
+                correct: 0
+            },
+            {
+                question: "Which CSS property is used to make text bold?",
+                options: ["text-weight", "font-weight", "bold", "text-style"],
+                correct: 1
+            },
+            {
+                question: "What is the correct HTML for creating a hyperlink?",
+                options: ["<a url='http://example.com'>", "<a href='http://example.com'>", "<link href='http://example.com'>", "<hyperlink='http://example.com'>"],
+                correct: 1
+            },
+            {
+                question: "Which JavaScript keyword is used to declare a constant?",
+                options: ["const", "constant", "let", "final"],
+                correct: 0
+            },
+            {
+                question: "What is the purpose of the z-index property in CSS?",
+                options: ["To set the zoom level", "To control the stacking order of elements", "To set the element size", "To define the z-axis rotation"],
+                correct: 1
+            },
+            {
+                question: "Which HTML element is used for the largest heading?",
+                options: ["<h6>", "<heading>", "<h1>", "<head>"],
+                correct: 2
+            },
+            {
+                question: "What does the 'this' keyword refer to in JavaScript?",
+                options: ["The previous object", "The current object", "The global object always", "The parent object"],
+                correct: 1
+            },
+            {
+                question: "Which CSS property is used to add shadows to elements?",
+                options: ["shadow", "element-shadow", "box-shadow", "text-shadow"],
+                correct: 2
+            },
+            {
+                question: "What is the correct way to comment in JavaScript?",
+                options: ["<!-- comment -->", "// comment", "** comment **", "# comment"],
+                correct: 1
+            },
+            {
+                question: "Which HTTP status code indicates a successful response?",
+                options: ["404", "500", "200", "301"],
+                correct: 2
+            },
+            {
+                question: "What does DOM stand for?",
+                options: ["Document Object Model", "Data Object Management", "Digital Ordinance Model", "Document Orientation Model"],
+                correct: 0
+            },
+            {
+                question: "Which CSS display value makes an element a flex container?",
+                options: ["flexbox", "flex", "flexible", "flex-container"],
+                correct: 1
+            },
+            {
+                question: "What is the purpose of the <meta> tag in HTML?",
+                options: ["To display metadata on the page", "To provide metadata about the HTML document", "To create meta links", "To define metal styling"],
+                correct: 1
+            },
+            {
+                question: "Which JavaScript method adds an element to the end of an array?",
+                options: ["append()", "push()", "add()", "insert()"],
+                correct: 1
+            },
+            {
+                question: "What is responsive web design?",
+                options: ["Design that responds to user clicks", "Design that adapts to different screen sizes", "Design that responds quickly", "Design with response forms"],
+                correct: 1
+            },
+            {
+                question: "Which HTML element is used to define important text?",
+                options: ["<important>", "<b>", "<strong>", "<i>"],
+                correct: 2
+            },
+            {
+                question: "What is the purpose of the 'use strict' directive in JavaScript?",
+                options: ["To enable strict mode for catching common coding mistakes", "To use strict typing", "To restrict variable usage", "To enable strict CSS parsing"],
+                correct: 0
+            },
+            {
+                question: "Which CSS property is used to control the space between lines of text?",
+                options: ["spacing", "line-height", "text-spacing", "line-spacing"],
+                correct: 1
+            },
+            {
+                question: "What is the correct HTML for making a checkbox?",
+                options: ["<input type='check'>", "<input type='checkbox'>", "<checkbox>", "<input type='tick'>"],
+                correct: 1
+            },
+            {
+                question: "Which JavaScript method is used to remove the last element from an array?",
+                options: ["removeLast()", "pop()", "delete()", "splice()"],
+                correct: 1
+            },
+            {
+                question: "What does URL stand for?",
+                options: ["Universal Resource Locator", "Uniform Resource Locator", "United Resource Link", "Universal Reference Locator"],
+                correct: 1
+            },
+            {
+                question: "Which CSS property is used to create rounded corners?",
+                options: ["corner-radius", "border-radius", "rounded-corners", "corner-style"],
+                correct: 1
+            },
+            {
+                question: "What is the purpose of the <form> element in HTML?",
+                options: ["To format text", "To create a container for input elements", "To display a formatted document", "To define form styling"],
+                correct: 1
+            },
+            {
+                question: "Which JavaScript loop is best for iterating over object properties?",
+                options: ["for loop", "while loop", "for...in loop", "do...while loop"],
+                correct: 2
+            },
+            {
+                question: "What is the CSS property to hide an element but keep its space?",
+                options: ["display: none", "visibility: hidden", "opacity: 0", "hidden: true"],
+                correct: 1
+            },
+            {
+                question: "Which HTML tag is used to define an unordered list?",
+                options: ["<ol>", "<list>", "<ul>", "<li>"],
+                correct: 2
+            },
+            {
+                question: "What is an event listener in JavaScript?",
+                options: ["A function that listens to audio events", "A procedure that waits for an event to occur", "A method to listen to server events", "A function that creates events"],
+                correct: 1
+            },
+            {
+                question: "Which CSS property specifies the transparency of an element?",
+                options: ["transparency", "opacity", "visibility", "filter"],
+                correct: 1
+            },
+            {
+                question: "What is the correct HTML for creating a dropdown list?",
+                options: ["<list>", "<dropdown>", "<select>", "<input type='dropdown'>"],
+                correct: 2
+            },
+            {
+                question: "Which JavaScript method is used to find an element by its ID?",
+                options: ["findById()", "getElement()", "getElementById()", "querySelector()"],
+                correct: 2
+            }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let testStarted = false;
+        let reviewMode = false;
+
+        function startTest() {
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('testScreen').classList.remove('hidden');
+            testStarted = true;
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const question = questions[currentQuestion];
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            document.getElementById('currentScore').textContent = `Score: ${calculateScore()}`;
+            document.getElementById('questionText').textContent = question.question;
+
+            const optionsHtml = question.options.map((option, index) => {
+                const letters = ['A', 'B', 'C', 'D'];
+                const selectedClass = userAnswers[currentQuestion] === index ? 'selected' : '';
+                return `
+                    <label class="option ${selectedClass}" onclick="selectOption(${index})">
+                        <input type="radio" name="answer" value="${index}">
+                        <span class="option-label">
+                            <span class="option-letter">${letters[index]}</span>
+                            <span>${option}</span>
+                        </span>
+                    </label>
+                `;
+            }).join('');
+
+            document.getElementById('optionsContainer').innerHTML = optionsHtml;
+
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+
+            if (currentQuestion === questions.length - 1) {
+                document.getElementById('nextBtn').textContent = 'Finish';
+            } else {
+                document.getElementById('nextBtn').textContent = 'Next';
+            }
+        }
+
+        function selectOption(index) {
+            userAnswers[currentQuestion] = index;
+
+            document.querySelectorAll('.option').forEach((opt, i) => {
+                opt.classList.remove('selected');
+                if (i === index) {
+                    opt.classList.add('selected');
+                }
+            });
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function calculateScore() {
+            let score = 0;
+            userAnswers.forEach((answer, index) => {
+                if (answer === questions[index].correct) {
+                    score++;
+                }
+            });
+            return score;
+        }
+
+        function showResults() {
+            document.getElementById('testScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.remove('hidden');
+
+            const score = calculateScore();
+            const percentage = Math.round((score / questions.length) * 100);
+            const incorrect = userAnswers.filter((answer, index) => answer !== null && answer !== questions[index].correct).length;
+            const unanswered = userAnswers.filter(answer => answer === null).length;
+
+            document.getElementById('finalScore').textContent = percentage + '%';
+            document.getElementById('correctCount').textContent = score;
+            document.getElementById('incorrectCount').textContent = incorrect;
+            document.getElementById('unansweredCount').textContent = unanswered;
+
+            const scoreCircle = document.getElementById('scoreCircle');
+            scoreCircle.classList.remove('excellent', 'good', 'poor');
+
+            let message = '';
+            if (percentage >= 80) {
+                scoreCircle.classList.add('excellent');
+                message = 'Excellent work! You have a strong understanding of the material.';
+            } else if (percentage >= 60) {
+                scoreCircle.classList.add('good');
+                message = 'Good job! You have a solid foundation, but there\'s room for improvement.';
+            } else {
+                scoreCircle.classList.add('poor');
+                message = 'Keep practicing! Review the material and try again.';
+            }
+
+            document.getElementById('resultsMessage').textContent = message;
+        }
+
+        function reviewAnswers() {
+            document.getElementById('resultsScreen').classList.add('hidden');
+            document.getElementById('reviewScreen').classList.remove('hidden');
+            reviewMode = true;
+
+            const reviewHtml = questions.map((question, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === question.correct;
+                const letters = ['A', 'B', 'C', 'D'];
+
+                const optionsHtml = question.options.map((option, optIndex) => {
+                    let optionClass = '';
+                    if (optIndex === question.correct) {
+                        optionClass = 'correct';
+                    } else if (optIndex === userAnswer && !isCorrect) {
+                        optionClass = 'incorrect';
+                    }
+
+                    return `
+                        <div class="option ${optionClass}" style="cursor: default;">
+                            <span class="option-label">
+                                <span class="option-letter">${letters[optIndex]}</span>
+                                <span>${option}</span>
+                            </span>
+                        </div>
+                    `;
+                }).join('');
+
+                return `
+                    <div class="question-card" style="margin-bottom: 1.5rem;">
+                        <div class="question-info" style="margin-bottom: 1rem;">
+                            <span>Question ${index + 1}</span>
+                            <span style="color: ${isCorrect ? 'var(--success)' : userAnswer === null ? 'var(--text-secondary)' : 'var(--error)'}">
+                                ${isCorrect ? 'Correct' : userAnswer === null ? 'Unanswered' : 'Incorrect'}
+                            </span>
+                        </div>
+                        <div class="question-text">${question.question}</div>
+                        <div class="options">${optionsHtml}</div>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('reviewContainer').innerHTML = reviewHtml;
+        }
+
+        function backToResults() {
+            document.getElementById('reviewScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.remove('hidden');
+            reviewMode = false;
+        }
+
+        function restartTest() {
+            currentQuestion = 0;
+            userAnswers = new Array(questions.length).fill(null);
+            reviewMode = false;
+
+            document.getElementById('startScreen').classList.remove('hidden');
+            document.getElementById('testScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.add('hidden');
+            document.getElementById('reviewScreen').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
