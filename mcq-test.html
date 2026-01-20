@@ -255,6 +255,63 @@
             border-color: var(--error);
         }
 
+        /* Explanation Box */
+        .explanation-box {
+            margin-top: 1.5rem;
+            padding: 1.25rem 1.5rem;
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+            border: 1px solid #a7f3d0;
+            border-left: 4px solid var(--success);
+            border-radius: 12px;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        .explanation-box.show {
+            display: block;
+        }
+
+        .explanation-box.incorrect-bg {
+            background: linear-gradient(135deg, #fef2f2 0%, #fff1f2 100%);
+            border-color: #fecaca;
+            border-left-color: var(--error);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .explanation-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            color: var(--success);
+            margin-bottom: 0.75rem;
+        }
+
+        .explanation-box.incorrect-bg .explanation-title {
+            color: var(--error);
+        }
+
+        .explanation-icon {
+            font-size: 1.25rem;
+        }
+
+        .explanation-text {
+            color: var(--text-primary);
+            font-size: 0.9375rem;
+            line-height: 1.7;
+        }
+
         .navigation {
             display: flex;
             justify-content: space-between;
@@ -536,6 +593,13 @@
             <div class="question-card">
                 <div class="question-text" id="questionText"></div>
                 <div class="options" id="optionsContainer"></div>
+                <div class="explanation-box" id="explanationBox">
+                    <div class="explanation-title">
+                        <span class="explanation-icon">&#128161;</span>
+                        <span>Simple Explanation</span>
+                    </div>
+                    <div class="explanation-text" id="explanationText"></div>
+                </div>
             </div>
 
             <div class="navigation">
@@ -595,209 +659,249 @@
             {
                 question: "What does NBFC stand for?",
                 options: ["Non-Banking Financial Company", "National Banking Finance Corporation", "Non-Business Financial Corporation", "National Business Finance Company"],
-                correct: 0
+                correct: 0,
+                explanation: "NBFC means Non-Banking Financial Company. Think of it like a company that does money-related work (like giving loans) but is NOT a regular bank. They help people get loans and manage money, but you can't open a savings account with them like you do at a bank."
             },
             {
                 question: "Which Act governs the registration and regulation of NBFCs in India?",
                 options: ["Banking Regulation Act, 1949", "Reserve Bank of India Act, 1934", "Companies Act, 2013", "SEBI Act, 1992"],
-                correct: 1
+                correct: 1,
+                explanation: "The RBI Act, 1934 is the rulebook for NBFCs. Just like schools have rules, NBFCs have rules too! RBI (Reserve Bank of India) is like the teacher who makes sure all NBFCs follow the rules. This Act tells NBFCs how to register and behave properly."
             },
             {
                 question: "What is the minimum Net Owned Fund (NOF) required for registration of an NBFC?",
                 options: ["Rs. 1 crore", "Rs. 2 crore", "Rs. 5 crore", "Rs. 10 crore"],
-                correct: 1
+                correct: 1,
+                explanation: "An NBFC needs at least Rs. 2 crore to start. Think of it like needing enough money in your piggy bank before you can open a lemonade stand. This money shows the NBFC is serious and can handle problems if things go wrong."
             },
             {
                 question: "Which of the following is NOT a type of NBFC?",
                 options: ["NBFC-ICC", "NBFC-MFI", "NBFC-Factor", "NBFC-Retail"],
-                correct: 3
+                correct: 3,
+                explanation: "NBFC-Retail doesn't exist! NBFCs come in different types like ice cream flavors - ICC (Investment & Credit), MFI (Microfinance), and Factor (buying bills). But there's no 'Retail' type. Each type has a special job it does."
             },
             {
                 question: "What is the principal business criteria for an NBFC?",
                 options: ["Financial assets must be more than 50% of total assets and income from financial assets must be more than 50% of gross income", "Financial assets must be 100% of total assets", "Income from financial assets must be 75% of gross income", "Total assets must exceed Rs. 500 crore"],
-                correct: 0
+                correct: 0,
+                explanation: "To be an NBFC, more than half (50%) of what you own and earn must come from money-related work. It's like saying: if you want to call yourself a baker, more than half your work should be baking, not selling toys!"
             },
             {
                 question: "What does NBFC-ICC stand for?",
                 options: ["Investment and Credit Company", "Insurance and Credit Corporation", "Investment and Capital Corporation", "Insurance and Capital Company"],
-                correct: 0
+                correct: 0,
+                explanation: "ICC means Investment and Credit Company. These NBFCs do two main things: they invest money (like putting money in good places to grow) and give credit (loans) to people and businesses. They're like helpful money managers!"
             },
             {
                 question: "Which NBFCs are allowed to accept public deposits?",
                 options: ["All NBFCs registered with RBI", "Only those with specific authorization from RBI", "Only NBFCs with NOF above Rs. 100 crore", "No NBFCs can accept public deposits"],
-                correct: 1
+                correct: 1,
+                explanation: "Not all NBFCs can take your money as deposits - only special ones that RBI says 'okay' to. It's like not everyone can babysit kids - only those with special permission. This keeps your money safe!"
             },
             {
                 question: "What is the maximum period for which an NBFC-D can accept deposits?",
                 options: ["36 months", "48 months", "60 months", "84 months"],
-                correct: 2
+                correct: 2,
+                explanation: "NBFCs can keep your deposit for maximum 60 months (5 years). Think of it like borrowing a toy from a friend - there's a time limit! After 5 years, they must return your money or you decide what to do next."
             },
             {
                 question: "What is the minimum period for which an NBFC-D can accept deposits?",
                 options: ["6 months", "12 months", "24 months", "36 months"],
-                correct: 1
+                correct: 1,
+                explanation: "The shortest time an NBFC can hold your deposit is 12 months (1 year). It's like a library book - you can't return it the next day! This gives the NBFC time to use the money properly and earn returns for you."
             },
             {
                 question: "What is an NBFC-MFI?",
                 options: ["Micro Finance Institution", "Major Finance Institution", "Medium Finance Institution", "Mutual Fund Institution"],
-                correct: 0
+                correct: 0,
+                explanation: "MFI means Micro Finance Institution. 'Micro' means very small. These NBFCs give tiny loans to poor people who can't go to big banks. It's like having a friend who lends you small amounts when you need help!"
             },
             // NBFC-MFI Specifics
             {
                 question: "What percentage of the total assets of NBFC-MFI should be in the nature of qualifying assets?",
                 options: ["50%", "65%", "75%", "85%"],
-                correct: 3
+                correct: 3,
+                explanation: "85% of an MFI's money must go to small loans for poor people. It's like saying if you have 100 candies, 85 must go to kids who really need them. This ensures MFIs stay focused on helping the poor, not doing other business."
             },
             {
                 question: "What is the maximum loan amount that can be given by an NBFC-MFI for income generation purposes?",
                 options: ["Rs. 50,000", "Rs. 75,000", "Rs. 1,00,000", "Rs. 1,25,000"],
-                correct: 3
+                correct: 3,
+                explanation: "MFIs can give up to Rs. 1,25,000 for starting small businesses. This money helps poor people buy things like a sewing machine or vegetables to sell. It's seed money to help them grow their own little business!"
             },
             {
                 question: "What is a Systemically Important NBFC (NBFC-SI)?",
                 options: ["NBFC with asset size of Rs. 100 crore and above", "NBFC with asset size of Rs. 500 crore and above", "NBFC with asset size of Rs. 1000 crore and above", "Any NBFC accepting public deposits"],
-                correct: 1
+                correct: 1,
+                explanation: "An NBFC with Rs. 500 crore or more is called 'Systemically Important'. It's like being a big fish in the pond - if something happens to them, many people get affected. So RBI watches them extra carefully!"
             },
             // Capital Requirements
             {
                 question: "What is the minimum CRAR (Capital to Risk Weighted Assets Ratio) for NBFCs?",
                 options: ["9%", "12%", "15%", "18%"],
-                correct: 2
+                correct: 2,
+                explanation: "NBFCs must keep 15% as safety money (CRAR). Imagine you have Rs. 100 to lend - you must keep Rs. 15 safe just in case borrowers don't pay back. This cushion protects the NBFC from big losses!"
             },
             {
                 question: "What is Tier I capital for an NBFC?",
                 options: ["Subordinated debt only", "Paid-up equity capital, free reserves, and certain other components minus intangible assets", "Only retained earnings", "Deposits from public"],
-                correct: 1
+                correct: 1,
+                explanation: "Tier I capital is the NBFC's own money - like your savings that belong to you. It includes money from shares (equity) and profits kept aside (reserves). It's the strongest type of safety money because it truly belongs to the company."
             },
             {
                 question: "What is Tier II capital for an NBFC?",
                 options: ["Paid-up equity capital", "Preference shares, subordinated debt, and general provisions", "Only retained earnings", "Customer deposits"],
-                correct: 1
+                correct: 1,
+                explanation: "Tier II capital is backup money - not as strong as Tier I. It includes loans the company took (subordinated debt) and money set aside for possible problems. Think of Tier I as your savings and Tier II as money you can borrow from family."
             },
             // Asset Classification
             {
                 question: "What is the asset classification norm for Standard Assets in NBFCs?",
                 options: ["No overdue payments", "Overdue for less than 90 days", "Overdue for less than 180 days", "Overdue for less than 30 days"],
-                correct: 1
+                correct: 1,
+                explanation: "A loan is 'Standard' (good) if the borrower is less than 90 days late. It's like homework - if you're only a little late, it's still okay. But if you're more than 90 days late, the loan becomes a problem (NPA)."
             },
             {
                 question: "When does an asset become a Non-Performing Asset (NPA) for an NBFC?",
                 options: ["When overdue for 30 days", "When overdue for 60 days", "When overdue for 90 days", "When overdue for 180 days"],
-                correct: 2
+                correct: 2,
+                explanation: "A loan becomes NPA (bad loan) after 90 days of no payment. Think of it like a plant - if you don't water it for 90 days, it's probably dead. Similarly, if someone doesn't pay for 90 days, the loan is considered 'not working'."
             },
             {
                 question: "What is a Sub-standard Asset?",
                 options: ["An asset which has remained NPA for a period less than or equal to 12 months", "An asset which has remained NPA for more than 12 months", "An asset where loss has been identified but not written off", "A standard asset with potential weakness"],
-                correct: 0
+                correct: 0,
+                explanation: "Sub-standard means the loan just became bad (NPA) but it's been less than 12 months. It's like when you first get sick - there's still hope you'll recover. The NBFC thinks there's a chance the borrower might still pay back."
             },
             {
                 question: "What is a Doubtful Asset?",
                 options: ["An asset which has remained in sub-standard category for 12 months", "An asset overdue for 90 days", "An asset with 50% provision", "A restructured asset"],
-                correct: 0
+                correct: 0,
+                explanation: "Doubtful means the loan has been bad for over 12 months. It's like being sick for a whole year - now everyone is doubtful you'll fully recover. The NBFC is unsure if they'll ever get this money back."
             },
             {
                 question: "What is a Loss Asset?",
                 options: ["Any NPA", "Asset where loss has been identified but not fully written off", "Asset overdue for 90 days", "Restructured asset"],
-                correct: 1
+                correct: 1,
+                explanation: "A Loss Asset is when the NBFC knows the money is gone but hasn't officially removed it from their books yet. It's like knowing your toy is broken beyond repair, but you haven't thrown it away yet."
             },
             // Provisioning Requirements
             {
                 question: "What is the provisioning requirement for Standard Assets for NBFC-ICC?",
                 options: ["0.25%", "0.40%", "0.50%", "1.00%"],
-                correct: 1
+                correct: 1,
+                explanation: "For good loans, NBFCs keep 0.40% aside 'just in case'. It's like keeping a small emergency fund. Even if everything seems fine, you save a tiny bit because you never know when problems might come!"
             },
             {
                 question: "What is the provisioning requirement for Sub-standard Assets for NBFCs?",
                 options: ["5%", "10%", "15%", "20%"],
-                correct: 1
+                correct: 1,
+                explanation: "For newly bad loans, NBFCs must keep 10% aside. Since the loan just went bad, there's still hope - so they save 10% just in case. It's like putting aside some money when a friend might not pay you back."
             },
             {
                 question: "What is the provisioning requirement for Doubtful Assets up to 1 year?",
                 options: ["10%", "20%", "30%", "50%"],
-                correct: 1
+                correct: 1,
+                explanation: "For doubtful loans (bad for 1-2 years), NBFCs save 20%. Since the situation is worse now, they need to save more. It's like preparing for a bigger problem - you need a bigger safety net!"
             },
             {
                 question: "What is the provisioning requirement for Loss Assets?",
                 options: ["50%", "75%", "90%", "100%"],
-                correct: 3
+                correct: 3,
+                explanation: "For lost loans, NBFCs must save 100% - the full amount! Since this money is definitely not coming back, they need to cover the entire loss. It's like accepting your toy is completely gone and buying a new one."
             },
             // KYC/AML
             {
                 question: "Which regulatory framework covers KYC norms for NBFCs?",
                 options: ["Master Direction on KYC", "PMLA, 2002", "Both A and B", "Companies Act, 2013"],
-                correct: 2
+                correct: 2,
+                explanation: "Both the KYC Master Direction AND PMLA (Prevention of Money Laundering Act) apply. It's like having two rulebooks - one about knowing your customers, and one about stopping bad people from hiding stolen money. Both work together!"
             },
             {
                 question: "What is Customer Due Diligence (CDD)?",
                 options: ["Collecting customer feedback", "Identifying and verifying customer identity", "Providing loans to customers", "Filing returns with RBI"],
-                correct: 1
+                correct: 1,
+                explanation: "CDD means checking who your customer really is - like checking ID cards. Before giving someone a loan, the NBFC makes sure the person is who they say they are. It's like checking if someone is really your friend before lending them your bicycle!"
             },
             {
                 question: "What is Enhanced Due Diligence (EDD)?",
                 options: ["Standard KYC procedures", "Additional scrutiny for high-risk customers", "Basic identity verification", "Annual review of accounts"],
-                correct: 1
+                correct: 1,
+                explanation: "EDD is extra-careful checking for risky customers. If someone seems suspicious or is very important (like a politician), the NBFC checks them more thoroughly. It's like double-checking homework when the answer seems too good to be true!"
             },
             {
                 question: "What is the threshold for reporting Suspicious Transaction Reports (STRs)?",
                 options: ["Rs. 10 lakh", "Rs. 50 lakh", "No threshold - based on nature of transaction", "Rs. 1 crore"],
-                correct: 2
+                correct: 2,
+                explanation: "There's NO minimum amount for suspicious transactions! If something seems fishy - even Rs. 100 - it must be reported. It's like telling a teacher when someone is being naughty, no matter how small the mischief!"
             },
             {
                 question: "What is the threshold for Cash Transaction Reports (CTRs)?",
                 options: ["Rs. 5 lakh", "Rs. 10 lakh", "Rs. 15 lakh", "Rs. 20 lakh"],
-                correct: 1
+                correct: 1,
+                explanation: "Cash transactions of Rs. 10 lakh or more must be reported. This helps track big cash movements. It's like when you spend a lot of pocket money, parents want to know where it went - just to make sure everything is okay!"
             },
             {
                 question: "What does PEP stand for in KYC context?",
                 options: ["Personal Exemption Policy", "Politically Exposed Person", "Private Equity Partner", "Public Enterprise Policy"],
-                correct: 1
+                correct: 1,
+                explanation: "PEP means Politically Exposed Person - people with power like ministers or their family. Because they have power, there's higher risk of corruption, so NBFCs must be extra careful with their accounts. VIPs need VIP-level checking!"
             },
             {
                 question: "What is the time limit for filing STR with FIU-IND?",
                 options: ["Immediately", "Within 7 days of suspicion", "Within 15 days", "Within 30 days"],
-                correct: 1
+                correct: 1,
+                explanation: "Suspicious transactions must be reported within 7 days. Quick reporting helps catch bad people faster! It's like telling the teacher about a problem right away instead of waiting - the sooner you report, the better."
             },
             // Fair Practices and Governance
             {
                 question: "What is the Fair Practices Code (FPC)?",
                 options: ["Code for employee conduct", "Code for fair and transparent dealing with customers", "Code for regulatory compliance", "Code for internal audit"],
-                correct: 1
+                correct: 1,
+                explanation: "Fair Practices Code is like a promise to be nice to customers. It says: 'We will be honest, clear, and fair when dealing with you.' It tells NBFCs to explain everything properly and treat customers well - like a good friend would!"
             },
             {
                 question: "What is the purpose of SARFAESI Act?",
                 options: ["Registration of NBFCs", "Recovery of dues without court intervention", "Accepting public deposits", "Granting loans to priority sector"],
-                correct: 1
+                correct: 1,
+                explanation: "SARFAESI helps NBFCs get their money back without going to court. Imagine lending someone your toy and they won't return it - SARFAESI lets NBFCs take the security (like a house) directly if someone doesn't pay, without waiting for a judge."
             },
             {
                 question: "What is the minimum number of independent directors required on the board of NBFC-UL?",
                 options: ["One-third", "Half", "Two-thirds", "All directors"],
-                correct: 1
+                correct: 1,
+                explanation: "Half the board must be independent directors - people who don't work for the company but watch over it. It's like having referees in a game - they make sure everything is fair because they're not on either team!"
             },
             // Types of NBFCs
             {
                 question: "What is an NBFC-Factor?",
                 options: ["An NBFC whose principal business is factoring", "An NBFC dealing in insurance", "An NBFC providing housing finance", "An NBFC dealing in securities"],
-                correct: 0
+                correct: 0,
+                explanation: "An NBFC-Factor buys bills and invoices from businesses. Say a shop sold goods but hasn't been paid yet - the Factor buys that 'IOU' and gives the shop money now. The Factor then collects from the buyer later. It helps businesses get cash quickly!"
             },
             {
                 question: "What is the definition of factoring activity?",
                 options: ["Purchasing receivables from sellers of goods/services", "Providing housing loans", "Accepting deposits", "Trading in securities"],
-                correct: 0
+                correct: 0,
+                explanation: "Factoring is buying 'receivables' - money that someone is supposed to receive later. If you're waiting for payment for something you sold, a Factor buys that right to receive payment from you. You get money now, they collect later!"
             },
             {
                 question: "What is an NBFC-P2P (Peer to Peer Lending Platform)?",
                 options: ["Platform providing loans to individuals only", "Online platform bringing lenders and borrowers together", "Platform for share trading", "Platform for insurance distribution"],
-                correct: 1
+                correct: 1,
+                explanation: "P2P is like a matchmaking website, but for money! It connects people who want to lend money with people who need to borrow. The platform is just the middleman - like introducing two friends who can help each other."
             },
             {
                 question: "What is the maximum exposure a lender can have across all P2P platforms?",
                 options: ["Rs. 10 lakh", "Rs. 25 lakh", "Rs. 50 lakh", "Rs. 1 crore"],
-                correct: 2
+                correct: 2,
+                explanation: "One person can lend maximum Rs. 50 lakh across all P2P platforms. This limit exists to protect lenders from losing too much money. It's like a parent saying 'you can only share this many toys' - to make sure you don't lose everything!"
             },
             {
                 question: "What is an NBFC-AA (Account Aggregator)?",
                 options: ["Company that consolidates financial accounts", "Non-deposit taking NBFC engaged in consent-based data sharing", "Company that aggregates insurance policies", "Company that provides credit scores"],
-                correct: 1
+                correct: 1,
+                explanation: "Account Aggregators help share your financial information safely. When you apply for a loan, instead of collecting many documents, the AA (with your permission) fetches your bank details, investments, etc. It's like a trusted messenger carrying your information!"
             },
             // Scale Based Regulation
             {
@@ -1254,6 +1358,13 @@
 
             document.getElementById('optionsContainer').innerHTML = optionsHtml;
 
+            // Handle explanation visibility - only show for wrong answers
+            if (isAnswered && userAnswer !== correctIndex) {
+                showExplanation();
+            } else {
+                hideExplanation();
+            }
+
             document.getElementById('prevBtn').disabled = currentQuestion === 0;
 
             if (currentQuestion === questions.length - 1) {
@@ -1294,6 +1405,31 @@
 
             // Update score immediately
             document.getElementById('currentScore').textContent = `Score: ${calculateScore()}`;
+
+            // Show explanation only when wrong
+            if (!isCorrect) {
+                showExplanation();
+            } else {
+                hideExplanation();
+            }
+        }
+
+        function showExplanation() {
+            const question = questions[currentQuestion];
+            const explanationBox = document.getElementById('explanationBox');
+            const explanationText = document.getElementById('explanationText');
+
+            // Get explanation or use a default message
+            const explanation = question.explanation ||
+                `The correct answer is: ${question.options[question.correct]}. This is an important concept in NBFC regulations that helps ensure proper compliance and governance.`;
+
+            explanationText.textContent = explanation;
+            explanationBox.classList.add('show', 'incorrect-bg');
+        }
+
+        function hideExplanation() {
+            const explanationBox = document.getElementById('explanationBox');
+            explanationBox.classList.remove('show', 'incorrect-bg');
         }
 
         function prevQuestion() {
