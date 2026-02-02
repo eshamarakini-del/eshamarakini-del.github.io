@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Test 2 - Finance | NBFC Workspace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #FDFCFA;
+            --bg-secondary: #F7F5F2;
+            --bg-card: #FFFFFF;
+            --text-primary: #1a1a1a;
+            --text-secondary: #5c5c5c;
+            --text-muted: #8a8a8a;
+            --border: #e5e2dd;
+            --accent: #2563eb;
+            --accent-light: #eff6ff;
+            --hover: #f5f5f5;
+            --success: #059669;
+            --success-light: #ecfdf5;
+            --error: #dc2626;
+            --error-light: #fef2f2;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        header {
+            background: rgba(253, 252, 250, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: color 0.2s;
+        }
+
+        .logo a span {
+            color: var(--accent);
+        }
+
+        .logo a:hover {
+            color: var(--accent);
+        }
+
+        .header-right {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .back-btn {
+            padding: 0.5rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .back-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem 4rem;
+        }
+
+        .test-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .test-header h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .test-header p {
+            color: var(--text-secondary);
+        }
+
+        .test-badge {
+            display: inline-block;
+            background: var(--accent-light);
+            color: var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            background: var(--border);
+            height: 6px;
+            border-radius: 3px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--accent), #3b82f6);
+            height: 100%;
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .question-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.25rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .question-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .question-text {
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .question-context {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .question-context code {
+            background: #e2e8f0;
+            padding: 0.125rem 0.375rem;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.85em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.25rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--bg-primary);
+        }
+
+        .option:hover {
+            border-color: var(--accent);
+            background: var(--accent-light);
+            transform: translateX(4px);
+        }
+
+        .option.selected {
+            border-color: var(--accent);
+            background: var(--accent-light);
+        }
+
+        .option.correct {
+            border-color: var(--success);
+            background: var(--success-light);
+            border-width: 2px;
+        }
+
+        .option.incorrect {
+            border-color: var(--error);
+            background: var(--error-light);
+            border-width: 2px;
+        }
+
+        .option input {
+            display: none;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .option-letter {
+            width: 32px;
+            height: 32px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            background: var(--bg-card);
+            transition: all 0.2s ease;
+        }
+
+        .option:hover .option-letter {
+            transform: scale(1.15);
+            border-color: var(--accent);
+            background: var(--accent-light);
+        }
+
+        .option.selected .option-letter {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .option.correct .option-letter {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+
+        .option.incorrect .option-letter {
+            background: var(--error);
+            color: white;
+            border-color: var(--error);
+        }
+
+        .explanation-box {
+            margin-top: 1.5rem;
+            padding: 1.25rem 1.5rem;
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+            border: 1px solid #a7f3d0;
+            border-left: 4px solid var(--success);
+            border-radius: 12px;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        .explanation-box.show {
+            display: block;
+        }
+
+        .explanation-box.incorrect-bg {
+            background: linear-gradient(135deg, #fef2f2 0%, #fff1f2 100%);
+            border-color: #fecaca;
+            border-left-color: var(--error);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .explanation-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            color: var(--success);
+            margin-bottom: 0.75rem;
+        }
+
+        .explanation-box.incorrect-bg .explanation-title {
+            color: var(--error);
+        }
+
+        .explanation-icon {
+            font-size: 1.25rem;
+        }
+
+        .explanation-text {
+            color: var(--text-primary);
+            font-size: 0.9375rem;
+            line-height: 1.7;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--bg-card);
+            font-size: 0.9375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .nav-btn.primary {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+        }
+
+        .nav-btn.primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        /* Start Screen */
+        .start-screen {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .start-screen h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, #444 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .start-screen p {
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .start-btn {
+            padding: 1rem 2.5rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+        }
+
+        .start-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+        }
+
+        .test-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-item .value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .info-item .label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .topics-covered {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem auto;
+            max-width: 500px;
+            text-align: left;
+        }
+
+        .topics-covered h3 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .topics-covered ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .topics-covered li {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            padding-left: 1.25rem;
+            position: relative;
+        }
+
+        .topics-covered li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.5em;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* Results Screen */
+        .results-screen {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .results-screen h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .score-circle {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 8px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem auto;
+        }
+
+        .score-circle.excellent {
+            border-color: var(--success);
+        }
+
+        .score-circle.good {
+            border-color: #f59e0b;
+        }
+
+        .score-circle.poor {
+            border-color: var(--error);
+        }
+
+        .score-number {
+            font-size: 3rem;
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .results-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .stat-value.correct {
+            color: var(--success);
+        }
+
+        .stat-value.incorrect {
+            color: var(--error);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .results-message {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .header-content,
+            .container {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+
+            .start-screen h1 {
+                font-size: 2rem;
+            }
+
+            .test-info {
+                gap: 1.5rem;
+            }
+
+            .results-stats {
+                gap: 2rem;
+            }
+
+            .navigation {
+                flex-direction: column;
+            }
+
+            .nav-btn {
+                width: 100%;
+            }
+
+            .topics-covered ul {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo"><a href="/nbfc.workspace/">NBFC <span>Workspace</span></a></div>
+            <div class="header-right">
+                <a href="/mcq-test.html" class="back-btn">MCQ Test 1</a>
+                <a href="/nbfc.workspace/" class="back-btn">Back to Workspace</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Start Screen -->
+        <div id="startScreen" class="start-screen">
+            <span class="test-badge">MCQ TEST 2 - FINANCE</span>
+            <h1>Financial Statements Assessment</h1>
+            <p>Test your knowledge of NBFC financial statements - Balance Sheet, Profit & Loss, Cash Flow, and financial reporting under Ind AS. This is an advanced test covering where items appear, classifications, and calculations.</p>
+
+            <div class="topics-covered">
+                <h3>Topics Covered</h3>
+                <ul>
+                    <li>Balance Sheet Structure</li>
+                    <li>Profit & Loss Statement</li>
+                    <li>Cash Flow Statement</li>
+                    <li>Asset Classification</li>
+                    <li>Liability Classification</li>
+                    <li>Equity Components</li>
+                    <li>Financial vs Non-Financial</li>
+                    <li>Revenue Recognition</li>
+                    <li>Expense Categories</li>
+                    <li>Provisioning Norms</li>
+                    <li>Ind AS Requirements</li>
+                    <li>NBFC Disclosures</li>
+                </ul>
+            </div>
+
+            <div class="test-info">
+                <div class="info-item">
+                    <div class="value">50</div>
+                    <div class="label">Questions</div>
+                </div>
+                <div class="info-item">
+                    <div class="value">No</div>
+                    <div class="label">Time Limit</div>
+                </div>
+                <div class="info-item">
+                    <div class="value">Advanced</div>
+                    <div class="label">Difficulty</div>
+                </div>
+            </div>
+            <button class="start-btn" onclick="startTest()">Start Finance Test</button>
+        </div>
+
+        <!-- Test Screen -->
+        <div id="testScreen" class="hidden">
+            <div class="test-header">
+                <span class="test-badge">MCQ TEST 2 - FINANCE</span>
+                <h1>Financial Statements Assessment</h1>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div class="question-info">
+                <span id="questionNumber">Question 1 of 50</span>
+                <span id="currentScore">Score: 0</span>
+            </div>
+
+            <div class="question-card">
+                <div class="question-context" id="questionContext"></div>
+                <div class="question-text" id="questionText"></div>
+                <div class="options" id="optionsContainer"></div>
+                <div class="explanation-box" id="explanationBox">
+                    <div class="explanation-title">
+                        <span class="explanation-icon">&#128161;</span>
+                        <span>Explanation</span>
+                    </div>
+                    <div class="explanation-text" id="explanationText"></div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button class="nav-btn" id="prevBtn" onclick="prevQuestion()" disabled>Previous</button>
+                <button class="nav-btn primary" id="nextBtn" onclick="nextQuestion()">Next</button>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="resultsScreen" class="hidden results-screen">
+            <h1>Test Complete!</h1>
+            <div class="score-circle" id="scoreCircle">
+                <div class="score-number" id="finalScore">0%</div>
+                <div class="score-label">Score</div>
+            </div>
+            <div class="results-stats">
+                <div class="stat-item">
+                    <div class="stat-value correct" id="correctCount">0</div>
+                    <div class="stat-label">Correct</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value incorrect" id="incorrectCount">0</div>
+                    <div class="stat-label">Incorrect</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="unansweredCount">0</div>
+                    <div class="stat-label">Unanswered</div>
+                </div>
+            </div>
+            <p class="results-message" id="resultsMessage"></p>
+            <div class="results-actions">
+                <button class="nav-btn" onclick="reviewAnswers()">Review Answers</button>
+                <button class="nav-btn primary" onclick="restartTest()">Try Again</button>
+            </div>
+        </div>
+
+        <!-- Review Screen -->
+        <div id="reviewScreen" class="hidden">
+            <div class="test-header">
+                <h1>Review Answers</h1>
+                <p>See which questions you got right and wrong</p>
+            </div>
+
+            <div id="reviewContainer"></div>
+
+            <div class="navigation" style="margin-top: 2rem;">
+                <button class="nav-btn" onclick="backToResults()">Back to Results</button>
+                <button class="nav-btn primary" onclick="restartTest()">Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Finance Question Bank - 100+ questions on Financial Statements
+        const questionBank = [
+            // Balance Sheet - Asset Classification
+            {
+                question: "In an NBFC's Balance Sheet, under which category does 'Cash and Cash Equivalents' appear?",
+                options: ["Non-Financial Assets", "Financial Assets", "Current Assets", "Liquid Assets"],
+                correct: 1,
+                explanation: "Cash and Cash Equivalents is classified under Financial Assets in an NBFC's Balance Sheet as per Ind AS. Financial Assets are assets that give the holder a contractual right to receive cash or another financial asset.",
+                context: "Balance Sheet Classification"
+            },
+            {
+                question: "Where does 'Loans' appear in an NBFC's Balance Sheet?",
+                options: ["Under Liabilities as Borrowings", "Under Financial Assets", "Under Non-Financial Assets", "Under Current Liabilities"],
+                correct: 1,
+                explanation: "Loans given by an NBFC to borrowers are assets for the NBFC (not liabilities). They appear under Financial Assets because they represent contractual rights to receive cash from borrowers.",
+                context: "Balance Sheet Classification"
+            },
+            {
+                question: "Property, Plant and Equipment (PPE) in an NBFC's Balance Sheet appears under:",
+                options: ["Financial Assets", "Non-Financial Assets", "Tangible Assets section only", "Current Assets"],
+                correct: 1,
+                explanation: "PPE like computers, furniture, and office equipment are Non-Financial Assets. They don't represent contractual rights to receive cash - they are physical items used in operations.",
+                context: "Balance Sheet Classification"
+            },
+            {
+                question: "Intangible Assets like software licenses appear under which section?",
+                options: ["Financial Assets", "Non-Financial Assets", "Other Assets", "Technology Assets"],
+                correct: 1,
+                explanation: "Intangible Assets are classified under Non-Financial Assets. They include items like software, patents, and trademarks that have value but no physical substance and don't represent contractual cash rights.",
+                context: "Balance Sheet Classification"
+            },
+            {
+                question: "Bank Balance other than Cash and Cash Equivalents (like Fixed Deposits with original maturity > 3 months) appears under:",
+                options: ["Cash and Cash Equivalents", "Bank Balance other than (a) above", "Investments", "Other Financial Assets"],
+                correct: 1,
+                explanation: "Fixed deposits with maturity more than 3 months are shown separately as 'Bank Balance other than Cash and Cash Equivalents' because they are not immediately available for use.",
+                context: "Balance Sheet Classification"
+            },
+            {
+                question: "Deferred Tax Assets (DTA) in an NBFC's Balance Sheet appears under:",
+                options: ["Financial Assets", "Non-Financial Assets", "Tax Assets", "Current Assets"],
+                correct: 1,
+                explanation: "Deferred Tax Assets are classified under Non-Financial Assets. They represent future tax benefits and are not contractual rights to receive cash from another party.",
+                context: "Balance Sheet Classification"
+            },
+            {
+                question: "Current Tax Assets (like Advance Tax paid) appear under:",
+                options: ["Financial Assets", "Non-Financial Assets", "Liabilities", "Provisions"],
+                correct: 1,
+                explanation: "Current Tax Assets (excess tax paid, TDS receivable) are classified under Non-Financial Assets. They represent claims against the government for tax refunds, not contractual financial rights.",
+                context: "Balance Sheet Classification"
+            },
+            {
+                question: "Trade Receivables in an NBFC's Balance Sheet appear under:",
+                options: ["Non-Financial Assets", "Financial Assets under Receivables", "Current Assets", "Other Assets"],
+                correct: 1,
+                explanation: "Trade Receivables are Financial Assets as they represent contractual rights to receive cash from customers for services rendered (like fee income receivables).",
+                context: "Balance Sheet Classification"
+            },
+            {
+                question: "GST Input Credit receivable appears under which category?",
+                options: ["Financial Assets", "Non-Financial Assets as Other Non-Financial Assets", "Current Assets", "Tax Assets"],
+                correct: 1,
+                explanation: "GST Input Credit is classified under Non-Financial Assets (specifically Other Non-Financial Assets). It represents a claim against the government, not a contractual financial right.",
+                context: "Balance Sheet Classification"
+            },
+            {
+                question: "Security Deposits paid by an NBFC (like rent deposits) appear under:",
+                options: ["Other Financial Assets", "Other Non-Financial Assets", "Prepaid Expenses", "Current Assets"],
+                correct: 1,
+                explanation: "Security Deposits are typically classified under Other Non-Financial Assets as they represent amounts held by third parties that will be returned, not contractual rights to receive specific cash flows.",
+                context: "Balance Sheet Classification"
+            },
+            // Balance Sheet - Liability Classification
+            {
+                question: "Borrowings from Banks in an NBFC's Balance Sheet appear under:",
+                options: ["Non-Financial Liabilities", "Financial Liabilities", "Current Liabilities", "Debt"],
+                correct: 1,
+                explanation: "Borrowings are Financial Liabilities as they represent contractual obligations to deliver cash to lenders. This includes term loans, working capital facilities, and other credit facilities.",
+                context: "Balance Sheet Classification"
+            },
+            {
+                question: "Trade Payables in an NBFC's Balance Sheet appear under:",
+                options: ["Financial Liabilities under Payables", "Non-Financial Liabilities", "Current Liabilities only", "Provisions"],
+                correct: 0,
+                explanation: "Trade Payables are Financial Liabilities shown under 'Payables'. They represent contractual obligations to pay cash to vendors and suppliers.",
+                context: "Balance Sheet Classification"
+            },
+            {
+                question: "Provisions for Employee Benefits like Gratuity appear under:",
+                options: ["Financial Liabilities", "Non-Financial Liabilities under Provisions", "Employee Benefit Obligations", "Other Liabilities"],
+                correct: 1,
+                explanation: "Gratuity provisions are Non-Financial Liabilities shown under Provisions. While they will eventually be paid in cash, the obligation is to employees based on service, not a contractual financial instrument.",
+                context: "Balance Sheet Classification"
+            },
+            {
+                question: "Deferred Tax Liabilities (DTL) appear under:",
+                options: ["Financial Liabilities", "Non-Financial Liabilities", "Tax Liabilities", "Provisions"],
+                correct: 1,
+                explanation: "Deferred Tax Liabilities are classified under Non-Financial Liabilities. They represent future tax obligations arising from temporary differences, not contractual financial obligations.",
+                context: "Balance Sheet Classification"
+            },
+            {
+                question: "Current Tax Liabilities (Provision for Income Tax) appear under:",
+                options: ["Financial Liabilities", "Non-Financial Liabilities", "Provisions", "Tax Payables"],
+                correct: 1,
+                explanation: "Current Tax Liabilities are Non-Financial Liabilities. They represent tax obligations to the government, not contractual obligations arising from financial instruments.",
+                context: "Balance Sheet Classification"
+            },
+            {
+                question: "TDS Payable and GST Payable appear under:",
+                options: ["Financial Liabilities", "Non-Financial Liabilities as Other Non-Financial Liabilities", "Statutory Dues", "Current Liabilities"],
+                correct: 1,
+                explanation: "TDS and GST payable are classified under Non-Financial Liabilities (Other Non-Financial Liabilities). These are statutory obligations to the government, not contractual financial liabilities.",
+                context: "Balance Sheet Classification"
+            },
+            {
+                question: "Other Financial Liabilities (like temporary accounts, excess collected from customers) appear under:",
+                options: ["Non-Financial Liabilities", "Financial Liabilities", "Current Liabilities", "Provisions"],
+                correct: 1,
+                explanation: "Items like excess amounts collected from customers are Financial Liabilities as they represent obligations to return cash to parties based on contractual or quasi-contractual arrangements.",
+                context: "Balance Sheet Classification"
+            },
+            // Equity Section
+            {
+                question: "Equity Share Capital in an NBFC's Balance Sheet appears under:",
+                options: ["Financial Liabilities", "Equity", "Share Capital section under Liabilities", "Capital Funds"],
+                correct: 1,
+                explanation: "Equity Share Capital is shown under the Equity section, separate from Liabilities. Equity represents ownership interest and is the residual interest in assets after deducting liabilities.",
+                context: "Balance Sheet Classification"
+            },
+            {
+                question: "Securities Premium collected on issue of shares appears under:",
+                options: ["Share Capital", "Other Equity under Reserves & Surplus", "Revenue Reserve", "Capital Reserve"],
+                correct: 1,
+                explanation: "Securities Premium is part of Other Equity under Reserves & Surplus. It represents the amount received over and above the face value of shares issued.",
+                context: "Balance Sheet Classification"
+            },
+            {
+                question: "Reserve Fund as per RBI Act (Section 45-IC) appears under:",
+                options: ["Statutory Reserves outside Balance Sheet", "Other Equity under Reserves & Surplus", "Retained Earnings", "Regulatory Capital"],
+                correct: 1,
+                explanation: "The Reserve Fund maintained as per RBI Act 45-IC(1) is part of Other Equity under Reserves & Surplus. NBFCs must transfer 20% of net profit to this reserve every year.",
+                context: "Balance Sheet Classification"
+            },
+            {
+                question: "Retained Earnings (accumulated profits) appear under:",
+                options: ["Share Capital", "Other Equity under Reserves & Surplus", "Revenue Reserves", "Profit & Loss Account"],
+                correct: 1,
+                explanation: "Retained Earnings represent accumulated undistributed profits and appear under Other Equity. They are part of Reserves & Surplus in the Equity section.",
+                context: "Balance Sheet Classification"
+            },
+            {
+                question: "Other Comprehensive Income (OCI) items like actuarial gains/losses appear under:",
+                options: ["Profit & Loss Statement only", "Other Equity under OCI Reserve", "Retained Earnings", "Revenue Reserves"],
+                correct: 1,
+                explanation: "Items of Other Comprehensive Income that won't be reclassified to P&L (like actuarial gains/losses on defined benefit plans) appear under Other Equity as a separate OCI reserve.",
+                context: "Balance Sheet Classification"
+            },
+            {
+                question: "Compulsorily Convertible Preference Shares (CCPS) are classified as:",
+                options: ["Debt/Borrowings", "Equity under Share Capital", "Hybrid Instruments", "Financial Liabilities"],
+                correct: 1,
+                explanation: "CCPS that will mandatorily convert to equity shares are classified as Equity (specifically as part of Share Capital) because they represent residual interest that will become ordinary equity.",
+                context: "Balance Sheet Classification"
+            },
+            // P&L Statement Questions
+            {
+                question: "Interest Income on Loans given by an NBFC appears under:",
+                options: ["Other Income", "Revenue from Operations", "Financial Income", "Non-Operating Income"],
+                correct: 1,
+                explanation: "Interest Income is part of Revenue from Operations for an NBFC since lending is the primary business. It's the main source of operating income for a lending NBFC.",
+                context: "Profit & Loss Statement"
+            },
+            {
+                question: "Processing Fees collected from borrowers appear under:",
+                options: ["Other Income", "Fees and Commission Income under Revenue from Operations", "Non-Operating Income", "Miscellaneous Income"],
+                correct: 1,
+                explanation: "Processing fees, confiscation charges, and other loan-related fees are part of Fees and Commission Income under Revenue from Operations, as they are directly related to the lending business.",
+                context: "Profit & Loss Statement"
+            },
+            {
+                question: "Interest Income on Fixed Deposits with banks appears under:",
+                options: ["Revenue from Operations", "Other Income", "Interest Income", "Bank Interest"],
+                correct: 1,
+                explanation: "Interest on FDs is shown under Other Income, not Revenue from Operations, because it's income from treasury activities, not from the core lending business.",
+                context: "Profit & Loss Statement"
+            },
+            {
+                question: "Capital Gains on sale of investments appear under:",
+                options: ["Revenue from Operations", "Other Income", "Investment Income", "Net Gain on Fair Value Changes"],
+                correct: 1,
+                explanation: "Capital gains on investments typically appear under Other Income as they are not part of the NBFC's primary lending operations but are incidental income from treasury management.",
+                context: "Profit & Loss Statement"
+            },
+            {
+                question: "Interest expense on borrowings appears under:",
+                options: ["Operating Expenses", "Finance Cost", "Interest and Bank Charges", "Administrative Expenses"],
+                correct: 1,
+                explanation: "Interest paid on loans and borrowings is shown under Finance Cost. This is the cost of funds borrowed to run the lending business and is a major expense for NBFCs.",
+                context: "Profit & Loss Statement"
+            },
+            {
+                question: "Processing fees paid to banks for obtaining loans appear under:",
+                options: ["Other Expenses", "Finance Cost", "Bank Charges", "Professional Fees"],
+                correct: 1,
+                explanation: "Processing fees for obtaining loans are part of Finance Cost along with interest expenses. They represent the cost of arranging debt finance.",
+                context: "Profit & Loss Statement"
+            },
+            {
+                question: "Employee salaries and wages appear under:",
+                options: ["Administrative Expenses", "Employee Benefits Expenses", "Operating Expenses", "Staff Costs"],
+                correct: 1,
+                explanation: "Salaries, wages, and related employee costs are shown under Employee Benefits Expenses. This includes basic pay, allowances, and other compensation.",
+                context: "Profit & Loss Statement"
+            },
+            {
+                question: "Contribution to Provident Fund and Gratuity expenses appear under:",
+                options: ["Other Expenses", "Employee Benefits Expenses", "Provisions", "Social Security Costs"],
+                correct: 1,
+                explanation: "PF contributions and gratuity expenses are part of Employee Benefits Expenses. They represent the employer's cost of providing post-employment benefits to employees.",
+                context: "Profit & Loss Statement"
+            },
+            {
+                question: "Depreciation on Property, Plant and Equipment appears under:",
+                options: ["Other Expenses", "Depreciation, Amortization and Impairment", "Administrative Expenses", "Operating Costs"],
+                correct: 1,
+                explanation: "Depreciation on fixed assets is shown under a separate head 'Depreciation, Amortization and Impairment'. This systematically allocates the cost of assets over their useful life.",
+                context: "Profit & Loss Statement"
+            },
+            {
+                question: "Amortization of Intangible Assets (like software) appears under:",
+                options: ["Other Expenses", "Depreciation, Amortization and Impairment", "Technology Expenses", "Administrative Expenses"],
+                correct: 1,
+                explanation: "Amortization of intangible assets is clubbed with depreciation under 'Depreciation, Amortization and Impairment'. It represents the systematic write-off of intangibles.",
+                context: "Profit & Loss Statement"
+            },
+            {
+                question: "Provision for Standard Assets (Expected Credit Loss on performing loans) appears under:",
+                options: ["Finance Cost", "Other Expenses", "Provisions below P&L", "Impairment on Financial Assets"],
+                correct: 1,
+                explanation: "Provisions for standard assets (ECL provisions) are typically shown under Other Expenses in the P&L. They represent the expected credit losses on the loan portfolio.",
+                context: "Profit & Loss Statement"
+            },
+            {
+                question: "Audit fees paid to statutory auditors appear under:",
+                options: ["Professional Fees", "Other Expenses", "Administrative Expenses", "Legal and Professional Fees"],
+                correct: 1,
+                explanation: "Audit fees are disclosed under Other Expenses. Companies are required to specifically disclose the amount paid to auditors for various services.",
+                context: "Profit & Loss Statement"
+            },
+            {
+                question: "GST expenses (non-creditable GST) appear under:",
+                options: ["Finance Cost", "Other Expenses", "Tax Expenses", "Administrative Expenses"],
+                correct: 1,
+                explanation: "GST that cannot be claimed as input credit is charged to Other Expenses. It's treated as part of the cost of the underlying expense or as a separate expense.",
+                context: "Profit & Loss Statement"
+            },
+            {
+                question: "Current Tax (Income Tax expense) appears under:",
+                options: ["Other Expenses", "Tax Expenses (after Profit before Tax)", "Finance Cost", "Administrative Expenses"],
+                correct: 1,
+                explanation: "Current tax is shown under Tax Expenses, which comes after 'Profit before Tax'. Tax expenses include both current tax and deferred tax components.",
+                context: "Profit & Loss Statement"
+            },
+            {
+                question: "Deferred Tax expense/credit appears under:",
+                options: ["Other Expenses", "Tax Expenses along with Current Tax", "Below the line items", "Provisions"],
+                correct: 1,
+                explanation: "Deferred tax is part of Tax Expenses shown after Profit before Tax. It represents tax effects of temporary differences between accounting and tax treatment.",
+                context: "Profit & Loss Statement"
+            },
+            // Cash Flow Statement Questions
+            {
+                question: "Interest received on loans given to borrowers is classified in Cash Flow Statement under:",
+                options: ["Investing Activities", "Operating Activities", "Financing Activities", "Non-Cash Items"],
+                correct: 1,
+                explanation: "For an NBFC, interest received on loans is an Operating Activity because lending is the primary business. It's different from manufacturing companies where it might be investing.",
+                context: "Cash Flow Statement"
+            },
+            {
+                question: "Loans disbursed to borrowers are classified in Cash Flow Statement under:",
+                options: ["Investing Activities", "Operating Activities", "Financing Activities", "Cash from Business"],
+                correct: 1,
+                explanation: "For NBFCs, loan disbursements are Operating Activities since lending is the core business. The increase in loan portfolio represents operating cash outflow.",
+                context: "Cash Flow Statement"
+            },
+            {
+                question: "Repayment of loans received from borrowers is classified under:",
+                options: ["Investing Activities", "Operating Activities", "Financing Activities", "Collections"],
+                correct: 1,
+                explanation: "Loan repayments received are Operating Activities for NBFCs. When borrowers repay principal, it's an operating cash inflow as lending is the primary business.",
+                context: "Cash Flow Statement"
+            },
+            {
+                question: "Interest paid on borrowings from banks appears under:",
+                options: ["Operating Activities", "Financing Activities", "Investing Activities", "Can be either Operating or Financing"],
+                correct: 3,
+                explanation: "Interest paid can be classified under either Operating or Financing Activities as per Ind AS 7. The company must consistently follow the chosen policy and disclose it.",
+                context: "Cash Flow Statement"
+            },
+            {
+                question: "Borrowings received from banks (new loans obtained) appear under:",
+                options: ["Operating Activities", "Financing Activities", "Investing Activities", "Cash from Banks"],
+                correct: 1,
+                explanation: "New borrowings obtained are Financing Activities as they represent raising of funds. This includes term loans, working capital facilities, and other credit lines.",
+                context: "Cash Flow Statement"
+            },
+            {
+                question: "Repayment of bank borrowings (principal repayment) appears under:",
+                options: ["Operating Activities", "Financing Activities", "Investing Activities", "Debt Servicing"],
+                correct: 1,
+                explanation: "Repayment of borrowings is a Financing Activity. It represents reduction of debt and return of principal to lenders.",
+                context: "Cash Flow Statement"
+            },
+            {
+                question: "Purchase of Property, Plant and Equipment appears under:",
+                options: ["Operating Activities", "Financing Activities", "Investing Activities", "Capital Expenditure"],
+                correct: 2,
+                explanation: "Purchase of fixed assets is an Investing Activity. It represents investment in long-term assets for use in business operations.",
+                context: "Cash Flow Statement"
+            },
+            {
+                question: "Proceeds from issue of equity shares appear under:",
+                options: ["Operating Activities", "Financing Activities", "Investing Activities", "Capital Receipts"],
+                correct: 1,
+                explanation: "Issue of shares is a Financing Activity as it represents raising of equity capital. It changes the equity composition of the company.",
+                context: "Cash Flow Statement"
+            },
+            {
+                question: "Dividends paid to shareholders appear under:",
+                options: ["Operating Activities", "Financing Activities", "Investing Activities", "Appropriation of Profits"],
+                correct: 1,
+                explanation: "Dividend payments are Financing Activities as they represent return of profits to equity shareholders, affecting the company's equity structure.",
+                context: "Cash Flow Statement"
+            },
+            {
+                question: "Income tax paid appears under:",
+                options: ["Operating Activities", "Financing Activities", "Investing Activities", "As a separate line item"],
+                correct: 0,
+                explanation: "Income tax paid is generally classified under Operating Activities unless it can be specifically identified with financing or investing activities.",
+                context: "Cash Flow Statement"
+            },
+            {
+                question: "Investment in Fixed Deposits (maturity > 3 months) appears under:",
+                options: ["Operating Activities", "Financing Activities", "Investing Activities", "Cash and Cash Equivalents"],
+                correct: 2,
+                explanation: "Investment in FDs with maturity over 3 months is an Investing Activity. These are not considered cash equivalents and represent deployment of surplus funds.",
+                context: "Cash Flow Statement"
+            },
+            // Financial Ratios and Concepts
+            {
+                question: "Total Equity in Balance Sheet equals:",
+                options: ["Share Capital only", "Share Capital + Other Equity", "Total Assets - Current Liabilities", "Net Worth + Reserves"],
+                correct: 1,
+                explanation: "Total Equity = Equity Share Capital + Other Equity (which includes Securities Premium, Reserves & Surplus, and OCI items). It represents the owners' residual interest.",
+                context: "Financial Concepts"
+            },
+            {
+                question: "The Balance Sheet equation for an NBFC is:",
+                options: ["Assets = Liabilities", "Assets = Liabilities + Equity", "Assets = Capital + Reserves", "Total Assets = Net Worth"],
+                correct: 1,
+                explanation: "Total Assets = Total Liabilities + Total Equity. This fundamental equation must always balance. Assets are funded by either borrowings (liabilities) or owners' funds (equity).",
+                context: "Financial Concepts"
+            },
+            {
+                question: "Net Worth of an NBFC is calculated as:",
+                options: ["Total Assets - Total Liabilities", "Share Capital + Reserves", "Paid-up Capital + Free Reserves - Intangible Assets - Accumulated Losses", "Total Equity"],
+                correct: 2,
+                explanation: "For regulatory purposes, Net Worth = Paid-up Capital + Free Reserves - Intangible Assets - Deferred Revenue Expenditure - Accumulated Losses. This differs from accounting equity.",
+                context: "Financial Concepts"
+            },
+            {
+                question: "Net Owned Funds (NOF) for an NBFC is:",
+                options: ["Same as Net Worth", "Net Worth - Investment in shares of subsidiaries and group companies", "Total Assets - Total Liabilities", "Tier 1 Capital"],
+                correct: 1,
+                explanation: "NOF = Net Worth minus investments in shares of subsidiaries, companies in the same group, and book value of debentures/bonds/loans of group companies. It's a key regulatory metric.",
+                context: "Financial Concepts"
+            },
+            {
+                question: "Profit for the year in P&L is transferred to Balance Sheet under:",
+                options: ["Share Capital", "Retained Earnings in Other Equity", "Reserves", "Current Year Profit"],
+                correct: 1,
+                explanation: "Profit for the year increases Retained Earnings in Other Equity. It represents accumulated undistributed profits that belong to shareholders.",
+                context: "Financial Concepts"
+            },
+            {
+                question: "The 20% transfer to Reserve Fund under RBI Act 45-IC comes from:",
+                options: ["Gross Profit", "Profit before Tax", "Net Profit after Tax", "Operating Profit"],
+                correct: 2,
+                explanation: "NBFCs must transfer at least 20% of Net Profit (after tax) to a Reserve Fund before declaring dividends. This is mandated under Section 45-IC(1) of RBI Act.",
+                context: "Financial Concepts"
+            },
+            // Asset Classification and Provisioning
+            {
+                question: "An asset becomes Non-Performing Asset (NPA) when it is overdue for:",
+                options: ["30 days", "60 days", "90 days", "180 days"],
+                correct: 2,
+                explanation: "A loan becomes NPA when interest or principal payment is overdue for more than 90 days. This is the key threshold for asset quality classification.",
+                context: "Asset Classification"
+            },
+            {
+                question: "Standard Assets are loans where:",
+                options: ["No dues are pending", "Dues are pending but less than 90 days overdue", "The borrower is a good customer", "Collateral is adequate"],
+                correct: 1,
+                explanation: "Standard Assets are loans where payments may be delayed but are less than 90 days overdue. They don't exhibit any problems and carry normal credit risk.",
+                context: "Asset Classification"
+            },
+            {
+                question: "Sub-Standard Assets are loans that have remained NPA for:",
+                options: ["Less than 6 months", "Less than or equal to 12 months", "More than 12 months", "Any period"],
+                correct: 1,
+                explanation: "Sub-Standard Assets are NPAs for a period of 12 months or less. These loans have well-defined credit weaknesses that jeopardize liquidation of the debt.",
+                context: "Asset Classification"
+            },
+            {
+                question: "Doubtful Assets are loans that have remained in sub-standard category for:",
+                options: ["6 months", "12 months", "18 months", "24 months"],
+                correct: 1,
+                explanation: "When a sub-standard asset remains NPA for more than 12 months, it becomes Doubtful. Collection in full is questionable based on currently known facts.",
+                context: "Asset Classification"
+            },
+            {
+                question: "Loss Assets are:",
+                options: ["All NPAs", "Assets where loss has been identified but not written off", "Assets with 100% provision", "Both B and C"],
+                correct: 3,
+                explanation: "Loss Assets are where loss has been identified by the NBFC or auditors or RBI, but the amount has not been fully written off. They require 100% provisioning.",
+                context: "Asset Classification"
+            },
+            {
+                question: "Impairment Loss Allowance on loans in Balance Sheet is shown as:",
+                options: ["Contra to Loans under Assets", "Under Provisions in Liabilities", "Deducted from Gross Loans to show Net Loans", "Under Other Expenses"],
+                correct: 2,
+                explanation: "Impairment loss allowance (provisions) is deducted from Gross Loans to arrive at Net Loans in the Balance Sheet. The notes show the breakup between gross and net.",
+                context: "Asset Classification"
+            },
+            // Specific NBFC Financial Statement Items
+            {
+                question: "Loans secured against Listed Securities (like LAS) appear under:",
+                options: ["Secured Loans - Tangible Assets", "Secured Loans - Intangible Assets", "Secured against Listed Securities as a separate category", "Unsecured Loans"],
+                correct: 2,
+                explanation: "Loans Against Securities (LAS) are shown separately as 'Secured against Listed Securities'. This is important as the security type affects risk weighting and provisioning.",
+                context: "NBFC Specific Items"
+            },
+            {
+                question: "Processing Fees and Confiscation Charges collected from borrowers are classified as:",
+                options: ["Interest Income", "Fees and Commission Income", "Other Income", "Penal Income"],
+                correct: 1,
+                explanation: "Processing fees, confiscation charges, and other loan-related charges are part of Fees and Commission Income under Revenue from Operations.",
+                context: "NBFC Specific Items"
+            },
+            {
+                question: "The difference between interest rate charged to borrowers and cost of funds is called:",
+                options: ["Interest Margin", "Net Interest Margin (NIM)", "Spread", "All of the above"],
+                correct: 3,
+                explanation: "The difference between interest earned and interest paid is called Spread, Interest Margin, or Net Interest Margin. It's a key profitability metric for NBFCs.",
+                context: "NBFC Specific Items"
+            },
+            {
+                question: "Finance Cost in P&L primarily comprises:",
+                options: ["Bank charges only", "Interest on borrowings, processing fees paid, bank charges", "All operational expenses", "Interest income"],
+                correct: 1,
+                explanation: "Finance Cost includes interest expenses on borrowings, processing fees paid to obtain loans, and bank charges. It represents the total cost of borrowed funds.",
+                context: "NBFC Specific Items"
+            },
+            {
+                question: "Which item appears under Total Income but NOT under Revenue from Operations?",
+                options: ["Interest Income on Loans", "Processing Fees", "Interest on Fixed Deposits", "Dividend from Subsidiaries"],
+                correct: 2,
+                explanation: "Interest on FDs is Other Income, not Revenue from Operations. Total Income = Revenue from Operations + Other Income. FD interest is treasury income, not core business.",
+                context: "NBFC Specific Items"
+            },
+            {
+                question: "Provision for Standard Assets in an NBFC is calculated on:",
+                options: ["Total Loans outstanding", "Gross NPA", "Standard Assets portion of loans", "Net NPA"],
+                correct: 2,
+                explanation: "Standard Asset provision is calculated on the Standard Assets portion of the loan book (performing loans). The percentage varies by type of NBFC and loan category.",
+                context: "NBFC Specific Items"
+            },
+            // Ind AS Specific Questions
+            {
+                question: "Under Ind AS, loans given by NBFCs are measured at:",
+                options: ["Fair Value always", "Amortised Cost or Fair Value through P&L", "Historical Cost", "Net Realizable Value"],
+                correct: 1,
+                explanation: "Under Ind AS 109, loans can be measured at Amortised Cost (most common), FVOCI, or FVTPL depending on the business model and cash flow characteristics.",
+                context: "Ind AS Requirements"
+            },
+            {
+                question: "Expected Credit Loss (ECL) under Ind AS 109 is calculated for:",
+                options: ["Only NPA loans", "Only Standard loans", "All financial assets including Standard loans", "Only Doubtful assets"],
+                correct: 2,
+                explanation: "ECL model requires provisions on ALL financial assets, including performing (Standard) loans. This is different from the old incurred loss model which required provisions only on NPAs.",
+                context: "Ind AS Requirements"
+            },
+            {
+                question: "Under Ind AS, actuarial gains/losses on defined benefit plans (like Gratuity) are recognized in:",
+                options: ["Profit & Loss Statement", "Other Comprehensive Income", "Directly in Equity", "Retained Earnings"],
+                correct: 1,
+                explanation: "Remeasurements of defined benefit plans (actuarial gains/losses) are recognized in Other Comprehensive Income and are not reclassified to P&L subsequently.",
+                context: "Ind AS Requirements"
+            },
+            {
+                question: "Total Comprehensive Income comprises:",
+                options: ["Profit for the year only", "Profit for the year + Other Comprehensive Income", "All gains and losses", "Operating Profit + Non-Operating Income"],
+                correct: 1,
+                explanation: "Total Comprehensive Income = Profit/Loss for the year + Other Comprehensive Income. OCI includes items like actuarial gains/losses that bypass the P&L.",
+                context: "Ind AS Requirements"
+            },
+            {
+                question: "Statement of Changes in Equity shows:",
+                options: ["Only current year changes", "Movement in all equity components from opening to closing", "Profit & Loss details", "Cash movements in equity"],
+                correct: 1,
+                explanation: "Statement of Changes in Equity shows how each component of equity changed during the year - opening balance, changes (profit, OCI, dividends, new issues), and closing balance.",
+                context: "Ind AS Requirements"
+            },
+            // Complex Scenario Questions
+            {
+                question: "If an NBFC has Total Assets of Rs. 5,000 Cr and Total Equity of Rs. 1,800 Cr, what are Total Liabilities?",
+                options: ["Rs. 5,000 Cr", "Rs. 1,800 Cr", "Rs. 3,200 Cr", "Rs. 6,800 Cr"],
+                correct: 2,
+                explanation: "Total Liabilities = Total Assets - Total Equity = Rs. 5,000 Cr - Rs. 1,800 Cr = Rs. 3,200 Cr. This follows the basic accounting equation.",
+                context: "Financial Calculations"
+            },
+            {
+                question: "An NBFC has Interest Income of Rs. 350 Cr and Finance Cost of Rs. 190 Cr. Net Interest Income is:",
+                options: ["Rs. 350 Cr", "Rs. 190 Cr", "Rs. 160 Cr", "Rs. 540 Cr"],
+                correct: 2,
+                explanation: "Net Interest Income = Interest Income - Finance Cost (Interest Expense) = Rs. 350 Cr - Rs. 190 Cr = Rs. 160 Cr. This is the spread earned on lending.",
+                context: "Financial Calculations"
+            },
+            {
+                question: "If Profit before Tax is Rs. 140 Cr and Total Tax is Rs. 35 Cr, what is Profit After Tax?",
+                options: ["Rs. 140 Cr", "Rs. 175 Cr", "Rs. 105 Cr", "Rs. 35 Cr"],
+                correct: 2,
+                explanation: "Profit After Tax = Profit before Tax - Tax Expenses = Rs. 140 Cr - Rs. 35 Cr = Rs. 105 Cr. This is the net profit available for distribution or retention.",
+                context: "Financial Calculations"
+            },
+            {
+                question: "If an NBFC earns Net Profit of Rs. 100 Cr, minimum transfer to Reserve Fund is:",
+                options: ["Rs. 10 Cr", "Rs. 15 Cr", "Rs. 20 Cr", "Rs. 25 Cr"],
+                correct: 2,
+                explanation: "Under RBI Act Section 45-IC, minimum 20% of Net Profit must be transferred to Reserve Fund = 20% of Rs. 100 Cr = Rs. 20 Cr.",
+                context: "Financial Calculations"
+            },
+            {
+                question: "Gross Loans are Rs. 5,000 Cr and Impairment Allowance is Rs. 50 Cr. Net Loans in Balance Sheet are:",
+                options: ["Rs. 5,000 Cr", "Rs. 4,950 Cr", "Rs. 5,050 Cr", "Rs. 50 Cr"],
+                correct: 1,
+                explanation: "Net Loans = Gross Loans - Impairment Allowance = Rs. 5,000 Cr - Rs. 50 Cr = Rs. 4,950 Cr. This is the carrying value of loans in the Balance Sheet.",
+                context: "Financial Calculations"
+            },
+            // Additional Tough Questions
+            {
+                question: "In Cash Flow Statement, what is the starting point for Indirect Method under Operating Activities?",
+                options: ["Cash from sales", "Profit before Tax", "Net Profit after Tax", "Operating Profit"],
+                correct: 1,
+                explanation: "Under indirect method, Operating Cash Flow starts with Profit before Tax, then adjusts for non-cash items (depreciation, provisions) and changes in working capital.",
+                context: "Cash Flow Statement"
+            },
+            {
+                question: "Depreciation is added back in Operating Cash Flow because:",
+                options: ["It's a cash expense", "It's a non-cash expense already deducted from profit", "It's an investing activity", "It reduces taxes"],
+                correct: 1,
+                explanation: "Depreciation is a non-cash expense that reduced profit but didn't involve cash outflow. It's added back to convert profit to cash basis in the indirect method.",
+                context: "Cash Flow Statement"
+            },
+            {
+                question: "An increase in Trade Payables during the year in Cash Flow (Operating) is:",
+                options: ["Added to profit", "Deducted from profit", "An investing activity", "A financing activity"],
+                correct: 0,
+                explanation: "Increase in payables means cash wasn't paid out (credit purchases). This is a source of cash/working capital benefit, so it's added while computing operating cash flow.",
+                context: "Cash Flow Statement"
+            },
+            {
+                question: "An increase in Loans (given to borrowers) in Cash Flow is:",
+                options: ["Added to operating profit", "Deducted from operating profit", "An investing activity", "A financing activity"],
+                correct: 1,
+                explanation: "For NBFCs, increase in loans represents cash going out to borrowers. It's deducted in Operating Activities as it's a use of cash in the primary business.",
+                context: "Cash Flow Statement"
+            },
+            {
+                question: "Which of these is NOT a Financial Asset?",
+                options: ["Cash", "Trade Receivables", "Prepaid Expenses", "Loans to Customers"],
+                correct: 2,
+                explanation: "Prepaid Expenses are Non-Financial Assets - they represent future services/benefits, not contractual rights to receive cash. Cash, receivables, and loans are all Financial Assets.",
+                context: "Balance Sheet Classification"
+            },
+            {
+                question: "Interest Receivable (accrued but not due) on loans appears under:",
+                options: ["Loans", "Other Financial Assets", "Trade Receivables", "Current Assets"],
+                correct: 0,
+                explanation: "Interest accrued on loans is typically included within the Loans balance itself (as part of amortized cost measurement) or shown under Loans if disclosed separately.",
+                context: "Balance Sheet Classification"
+            },
+            {
+                question: "Unamortized Processing Fee received from borrowers is:",
+                options: ["Added to Loans", "Deducted from Loans (as part of EIR calculation)", "Shown as Deferred Income", "Part of Revenue"],
+                correct: 1,
+                explanation: "Under Effective Interest Rate (EIR) method, upfront fees are spread over loan tenure. Unamortized portion is netted against loans as part of amortized cost calculation.",
+                context: "NBFC Specific Items"
+            },
+            {
+                question: "Earnings Per Share (EPS) is calculated on:",
+                options: ["Profit before Tax", "Profit after Tax attributable to equity shareholders", "Total Comprehensive Income", "Operating Profit"],
+                correct: 1,
+                explanation: "Basic EPS = (Profit after Tax - Preference Dividend) / Weighted Average Equity Shares. It shows profit earned per ordinary share.",
+                context: "Financial Concepts"
+            },
+            {
+                question: "Which financial statement shows the financial position at a point in time?",
+                options: ["Profit & Loss Statement", "Balance Sheet", "Cash Flow Statement", "Statement of Changes in Equity"],
+                correct: 1,
+                explanation: "Balance Sheet shows financial position AS AT a specific date (snapshot). P&L and Cash Flow show flows DURING a period. Both perspectives are important.",
+                context: "Financial Concepts"
+            },
+            {
+                question: "Revenue Recognition for Interest Income under Ind AS is based on:",
+                options: ["Cash receipt", "Effective Interest Rate Method on accrual basis", "Invoice date", "Due date"],
+                correct: 1,
+                explanation: "Interest income is recognized using the Effective Interest Rate (EIR) method, which allocates interest income over the life of the loan based on amortized cost.",
+                context: "Ind AS Requirements"
+            }
+        ];
+
+        // Shuffle function using Fisher-Yates algorithm
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        // Select random questions for each test
+        const QUESTIONS_PER_TEST = 50;
+        let questions = [];
+
+        let currentQuestion = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let testStarted = false;
+        let reviewMode = false;
+        let answeredQuestions = new Set();
+
+        function startTest() {
+            questions = shuffleArray(questionBank).slice(0, QUESTIONS_PER_TEST);
+            userAnswers = new Array(questions.length).fill(null);
+            currentQuestion = 0;
+            answeredQuestions = new Set();
+
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('testScreen').classList.remove('hidden');
+            testStarted = true;
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const question = questions[currentQuestion];
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            document.getElementById('currentScore').textContent = `Score: ${calculateScore()}`;
+            document.getElementById('questionText').textContent = question.question;
+
+            // Show context if available
+            const contextEl = document.getElementById('questionContext');
+            if (question.context) {
+                contextEl.innerHTML = `<strong>Topic:</strong> ${question.context}`;
+                contextEl.style.display = 'block';
+            } else {
+                contextEl.style.display = 'none';
+            }
+
+            const isAnswered = answeredQuestions.has(currentQuestion);
+            const userAnswer = userAnswers[currentQuestion];
+            const correctIndex = question.correct;
+
+            const optionsHtml = question.options.map((option, index) => {
+                const letters = ['A', 'B', 'C', 'D'];
+                let optionClass = '';
+                let pointerStyle = '';
+
+                if (isAnswered) {
+                    pointerStyle = 'pointer-events: none;';
+                    if (index === correctIndex) {
+                        optionClass = 'correct';
+                    }
+                    if (index === userAnswer && userAnswer !== correctIndex) {
+                        optionClass = 'incorrect';
+                    }
+                }
+
+                return `
+                    <label class="option ${optionClass}" onclick="selectOption(${index})" style="${pointerStyle}">
+                        <input type="radio" name="answer" value="${index}">
+                        <span class="option-label">
+                            <span class="option-letter">${letters[index]}</span>
+                            <span>${option}</span>
+                        </span>
+                    </label>
+                `;
+            }).join('');
+
+            document.getElementById('optionsContainer').innerHTML = optionsHtml;
+
+            // Handle explanation visibility
+            if (isAnswered && userAnswer !== correctIndex) {
+                showExplanation();
+            } else {
+                hideExplanation();
+            }
+
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+
+            if (currentQuestion === questions.length - 1) {
+                document.getElementById('nextBtn').textContent = 'Finish';
+            } else {
+                document.getElementById('nextBtn').textContent = 'Next';
+            }
+        }
+
+        function selectOption(index) {
+            if (answeredQuestions.has(currentQuestion)) {
+                return;
+            }
+
+            userAnswers[currentQuestion] = index;
+            answeredQuestions.add(currentQuestion);
+
+            const correctIndex = questions[currentQuestion].correct;
+            const isCorrect = index === correctIndex;
+
+            document.querySelectorAll('.option').forEach((opt, i) => {
+                opt.classList.remove('selected');
+                opt.style.pointerEvents = 'none';
+
+                if (i === correctIndex) {
+                    opt.classList.add('correct');
+                }
+                if (i === index && !isCorrect) {
+                    opt.classList.add('incorrect');
+                }
+            });
+
+            document.getElementById('currentScore').textContent = `Score: ${calculateScore()}`;
+
+            if (!isCorrect) {
+                showExplanation();
+            } else {
+                hideExplanation();
+            }
+        }
+
+        function showExplanation() {
+            const question = questions[currentQuestion];
+            const explanationBox = document.getElementById('explanationBox');
+            const explanationText = document.getElementById('explanationText');
+
+            const explanation = question.explanation ||
+                `The correct answer is: ${question.options[question.correct]}.`;
+
+            explanationText.textContent = explanation;
+            explanationBox.classList.add('show', 'incorrect-bg');
+        }
+
+        function hideExplanation() {
+            const explanationBox = document.getElementById('explanationBox');
+            explanationBox.classList.remove('show', 'incorrect-bg');
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function calculateScore() {
+            let score = 0;
+            userAnswers.forEach((answer, index) => {
+                if (answer === questions[index].correct) {
+                    score++;
+                }
+            });
+            return score;
+        }
+
+        function showResults() {
+            document.getElementById('testScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.remove('hidden');
+
+            const score = calculateScore();
+            const percentage = Math.round((score / questions.length) * 100);
+            const incorrect = userAnswers.filter((answer, index) => answer !== null && answer !== questions[index].correct).length;
+            const unanswered = userAnswers.filter(answer => answer === null).length;
+
+            document.getElementById('finalScore').textContent = percentage + '%';
+            document.getElementById('correctCount').textContent = score;
+            document.getElementById('incorrectCount').textContent = incorrect;
+            document.getElementById('unansweredCount').textContent = unanswered;
+
+            const scoreCircle = document.getElementById('scoreCircle');
+            scoreCircle.classList.remove('excellent', 'good', 'poor');
+
+            let message = '';
+            if (percentage >= 80) {
+                scoreCircle.classList.add('excellent');
+                message = 'Excellent! You have strong knowledge of NBFC financial statements.';
+            } else if (percentage >= 60) {
+                scoreCircle.classList.add('good');
+                message = 'Good effort! Review the explanations for questions you missed.';
+            } else {
+                scoreCircle.classList.add('poor');
+                message = 'Keep studying! Focus on understanding where each item appears in financial statements.';
+            }
+
+            document.getElementById('resultsMessage').textContent = message;
+        }
+
+        function reviewAnswers() {
+            document.getElementById('resultsScreen').classList.add('hidden');
+            document.getElementById('reviewScreen').classList.remove('hidden');
+            reviewMode = true;
+
+            const reviewHtml = questions.map((question, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === question.correct;
+                const letters = ['A', 'B', 'C', 'D'];
+
+                const optionsHtml = question.options.map((option, optIndex) => {
+                    let optionClass = '';
+                    if (optIndex === question.correct) {
+                        optionClass = 'correct';
+                    } else if (optIndex === userAnswer && !isCorrect) {
+                        optionClass = 'incorrect';
+                    }
+
+                    return `
+                        <div class="option ${optionClass}" style="cursor: default;">
+                            <span class="option-label">
+                                <span class="option-letter">${letters[optIndex]}</span>
+                                <span>${option}</span>
+                            </span>
+                        </div>
+                    `;
+                }).join('');
+
+                return `
+                    <div class="question-card" style="margin-bottom: 1.5rem;">
+                        <div class="question-info" style="margin-bottom: 1rem;">
+                            <span>Question ${index + 1}${question.context ? ` - ${question.context}` : ''}</span>
+                            <span style="color: ${isCorrect ? 'var(--success)' : userAnswer === null ? 'var(--text-secondary)' : 'var(--error)'}">
+                                ${isCorrect ? 'Correct' : userAnswer === null ? 'Unanswered' : 'Incorrect'}
+                            </span>
+                        </div>
+                        <div class="question-text">${question.question}</div>
+                        <div class="options">${optionsHtml}</div>
+                        ${!isCorrect && question.explanation ? `
+                            <div class="explanation-box show incorrect-bg" style="margin-top: 1rem;">
+                                <div class="explanation-title">
+                                    <span class="explanation-icon">&#128161;</span>
+                                    <span>Explanation</span>
+                                </div>
+                                <div class="explanation-text">${question.explanation}</div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('reviewContainer').innerHTML = reviewHtml;
+        }
+
+        function backToResults() {
+            document.getElementById('reviewScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.remove('hidden');
+            reviewMode = false;
+        }
+
+        function restartTest() {
+            questions = shuffleArray(questionBank).slice(0, QUESTIONS_PER_TEST);
+            currentQuestion = 0;
+            userAnswers = new Array(questions.length).fill(null);
+            answeredQuestions = new Set();
+            reviewMode = false;
+
+            document.getElementById('startScreen').classList.remove('hidden');
+            document.getElementById('testScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.add('hidden');
+            document.getElementById('reviewScreen').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
